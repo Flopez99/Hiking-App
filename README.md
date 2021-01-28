@@ -1,3 +1,3 @@
-## Hiking-App
+# Hiking-App
 
-# Smaller
+## Smaller
