@@ -1,0 +1,36 @@
+
+*{
+	dark-primary-color: #388E3C;
+	default-primary-color: #4CAF50; 
+	light-primary-color: #C8E6C9; 
+	text-primary-color: #FFFFFF; 
+	accent-color:#607D8B; 
+	primary-text-color: #212121; 
+	secondary-text-color: #757575; 
+	divider-color: #BDBDBD; 
+}
+
+.root {
+	-fx-background-color: default-primary-color;
+	
+}
+.label {
+    -fx-font-size: 15pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: primary-text-color;
+}
+#Welcome{
+	 -fx-font-size: 30pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: text-primary-color;
+}
+.button {
+  -fx-background-color: accent-color;
+  -fx-background-radius: 0;
+  -fx-border: none;
+  -fx-text-fill:text-primary-color ;
+  -fx-text-align: center;
+  -fx-display: inline-block;
+  font-size: 16px;
+}
+
