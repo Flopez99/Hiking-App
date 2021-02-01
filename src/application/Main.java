@@ -22,6 +22,7 @@ public class Main extends Application {
 		Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("World of Hiking");
+		primaryStage.setResizable(false);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}

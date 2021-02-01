@@ -2,72 +2,45 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 
 <AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
    <children>
-      <GridPane alignment="CENTER" hgap="50.0" layoutX="137.0" layoutY="71.0" prefHeight="442.0" prefWidth="427.0" AnchorPane.bottomAnchor="-13.0" AnchorPane.leftAnchor="137.0" AnchorPane.rightAnchor="136.0" AnchorPane.topAnchor="71.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="199.99996337890624" minWidth="10.0" prefWidth="194.39998779296874" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.80001220703124" minWidth="10.0" prefWidth="192.80001220703124" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="118.20002593994141" minHeight="10.0" prefHeight="115.80000152587891" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="179.19999389648441" minHeight="10.0" prefHeight="148.80000000000004" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="194.40001831054687" minHeight="10.0" prefHeight="169.39999999999998" vgrow="SOMETIMES" />
-        </rowConstraints>
+      <HBox alignment="CENTER" layoutX="250.0" layoutY="434.0" prefHeight="65.0" prefWidth="200.0" spacing="25.0">
          <children>
-            <VBox>
-               <children>
-                  <Label text="First Name:" />
-                  <TextField fx:id="firstName" prefHeight="26.0" prefWidth="319.0" />
-               </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
-               <children>
-                  <Label text="Last Name:" />
-                  <TextField fx:id="lastName" prefHeight="26.0" prefWidth="319.0" />
-               </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
-               <children>
-                  <Label text="Phone Number:" />
-                  <TextField fx:id="phoneNumber" prefHeight="26.0" prefWidth="181.0" />
-               </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <children>
-                  <Label text="Username:" />
-                  <TextField fx:id="userName" prefHeight="26.0" prefWidth="319.0" />
-               </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <children>
-                  <Label text="Password:" />
-                  <PasswordField fx:id="password" />
-               </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
-               <children>
-                  <Label prefHeight="18.0" prefWidth="133.0" text="Profile Picture:" />
-                  <ImageView fitHeight="63.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true" />
-                  <Button mnemonicParsing="false" text="Add" />
-               </children>
-            </VBox>
-         </children>
-      </GridPane>
-      <HBox alignment="CENTER" layoutX="257.0" layoutY="415.0" prefHeight="65.0" prefWidth="200.0" spacing="25.0">
-         <children>
-            <Button mnemonicParsing="false" onAction="#changeSceneLogIn" prefHeight="40.0" prefWidth="90.0" text="Cancel" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#createNewUser" prefHeight="40.0" prefWidth="90.0" text="Sign Up" />
+            <Button mnemonicParsing="false" onAction="#changeSceneLogIn" prefHeight="50.0" prefWidth="90.0" text="Cancel" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#createNewUser" prefHeight="50.0" prefWidth="90.0" text="Sign Up" />
          </children></HBox>
+      <Label id="Welcome" layoutX="173.0" layoutY="14.0" text="New User Registration" underline="true" />
+      <VBox layoutX="66.0" layoutY="145.0" prefHeight="270.0" prefWidth="174.0" spacing="10.0">
+         <children>
+            <Label prefHeight="22.0" prefWidth="121.0" text="First Name: " />
+            <TextField />
+            <Label prefHeight="22.0" prefWidth="121.0" text="Last Name: " />
+            <TextField />
+            <Label prefHeight="22.0" prefWidth="121.0" text="Address: " />
+            <TextField />
+            <Label prefHeight="22.0" prefWidth="83.0" text="Phone: " />
+            <TextField />
+         </children>
+      </VBox>
+      <Circle fill="DODGERBLUE" layoutX="350.0" layoutY="105.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+      <Button layoutX="394.0" layoutY="92.0" mnemonicParsing="false" text="Edit" />
+      <VBox layoutX="453.0" layoutY="145.0" prefHeight="270.0" prefWidth="173.0" spacing="10.0">
+         <children>
+            <Label prefHeight="22.0" prefWidth="121.0" text="Username:" />
+            <TextField />
+            <Label prefHeight="22.0" prefWidth="121.0" text="Password:" />
+            <TextField />
+            <Label prefHeight="22.0" prefWidth="150.0" text="Confirm Password:" />
+            <TextField />
+            <Label prefHeight="22.0" prefWidth="105.0" text="Skill Level:" />
+            <TextField />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

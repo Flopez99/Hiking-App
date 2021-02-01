@@ -26,7 +26,7 @@ public class LoginController implements Initializable{
 	private TreeMap<String, User> users;
 	
 	@FXML
-	private TextField userName, password, logUser, phoneNumber, firstName, lastName;
+	private TextField usernameField, passwordField,userName, password, phoneNumber, firstName, lastName;
 	
 	
 	public void createNewUser(ActionEvent e) throws IOException{
@@ -62,12 +62,12 @@ public class LoginController implements Initializable{
 	
 	
 	public void logIn(ActionEvent event) throws IOException {
-		String uName = userName.getText();
-		String pWord = password.getText();
+		String uName = usernameField.getText();
+		String pWord = passwordField.getText();
 
 		if (users.containsKey(uName) && users.get(uName).getPassword().equals(pWord)) {
 			loggedUser = users.get(uName);
-			
+			Data.setLoggedUser(loggedUser);
 			changeSceneLoggedIn(event);
 		} else {
 			System.out.println("Error");
@@ -75,7 +75,7 @@ public class LoginController implements Initializable{
 	
 	}
 	
-	private void changeSceneLoggedIn(ActionEvent e) throws IOException {
+	public void changeSceneLoggedIn(ActionEvent e) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("/view/LoggedIn.fxml"));
 		Scene scene = new Scene(root);
 		Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
