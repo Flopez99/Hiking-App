@@ -19,7 +19,7 @@ public class User implements Serializable {
 	private String password;
 	private LinkedList<Trail> history;
 	private TreeMap<String, Trail> historyMap;
-	private Image profilePicture;
+	private String profilePicture;
 
 	private LinkedList<Trail> currentTrail;
 
@@ -116,11 +116,11 @@ public class User implements Serializable {
 		this.historyMap = historyMap;
 	}
 
-	public Image getProfilePicture() {
+	public String getProfilePicture() {
 		return profilePicture;
 	}
 
-	public void setProfilePicture(Image profilePicture) {
+	public void setProfilePicture(String profilePicture) {
 		this.profilePicture = profilePicture;
 	}
 

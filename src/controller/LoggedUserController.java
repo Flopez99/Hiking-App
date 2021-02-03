@@ -23,12 +23,31 @@ public class LoggedUserController implements Initializable {
 
 	
 	@FXML
-	public Label nameLabel;
+	public Label fName;
 	
 	public void changeNameLabel() {
-		nameLabel.setText(loggedUser.getfName().get());
+		fName.setText(loggedUser.getfName().get());
 	}
 	
+	
+	public void changeSceneManagement(ActionEvent e) throws IOException {
+		loggedUser = null;
+		Parent root = FXMLLoader.load(getClass().getResource("/view/Management.fxml"));
+		Scene scene = new Scene(root);
+		Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
+		window.setScene(scene);
+		window.show();
+		
+	}
+	public void changeSceneTrailRegister(ActionEvent e) throws IOException {
+		loggedUser = null;
+		Parent root = FXMLLoader.load(getClass().getResource("/view/TrailRegister.fxml"));
+		Scene scene = new Scene(root);
+		Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
+		window.setScene(scene);
+		window.show();
+		
+	}
 	public void changeSceneLogOut(ActionEvent e) throws IOException {
 		loggedUser = null;
 		Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));

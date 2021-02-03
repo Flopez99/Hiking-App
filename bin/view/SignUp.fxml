@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -12,32 +13,32 @@
    <children>
       <HBox alignment="CENTER" layoutX="250.0" layoutY="434.0" prefHeight="65.0" prefWidth="200.0" spacing="25.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#changeSceneLogIn" prefHeight="50.0" prefWidth="90.0" text="Cancel" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#changeSceneLogIn" prefHeight="50.0" prefWidth="90.0" text="Cancel" />
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#createNewUser" prefHeight="50.0" prefWidth="90.0" text="Sign Up" />
          </children></HBox>
       <Label id="Welcome" layoutX="173.0" layoutY="14.0" text="New User Registration" underline="true" />
       <VBox layoutX="66.0" layoutY="145.0" prefHeight="270.0" prefWidth="174.0" spacing="10.0">
          <children>
             <Label prefHeight="22.0" prefWidth="121.0" text="First Name: " />
-            <TextField />
+            <TextField fx:id="firstName" />
             <Label prefHeight="22.0" prefWidth="121.0" text="Last Name: " />
-            <TextField />
+            <TextField fx:id="lastName" />
             <Label prefHeight="22.0" prefWidth="121.0" text="Address: " />
             <TextField />
             <Label prefHeight="22.0" prefWidth="83.0" text="Phone: " />
-            <TextField />
+            <TextField fx:id="phoneNumber" />
          </children>
       </VBox>
-      <Circle fill="DODGERBLUE" layoutX="350.0" layoutY="105.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-      <Button layoutX="394.0" layoutY="92.0" mnemonicParsing="false" text="Edit" />
+      <Circle fx:id="myCircle" fill="DODGERBLUE" layoutX="350.0" layoutY="105.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+      <Button layoutX="394.0" layoutY="92.0" mnemonicParsing="false" onAction="#selectPicture" text="Edit" />
       <VBox layoutX="453.0" layoutY="145.0" prefHeight="270.0" prefWidth="173.0" spacing="10.0">
          <children>
             <Label prefHeight="22.0" prefWidth="121.0" text="Username:" />
-            <TextField />
+            <TextField fx:id="userName" />
             <Label prefHeight="22.0" prefWidth="121.0" text="Password:" />
-            <TextField />
+            <PasswordField fx:id="password" />
             <Label prefHeight="22.0" prefWidth="150.0" text="Confirm Password:" />
-            <TextField />
+            <PasswordField />
             <Label prefHeight="22.0" prefWidth="105.0" text="Skill Level:" />
             <TextField />
          </children>

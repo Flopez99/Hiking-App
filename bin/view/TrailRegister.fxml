@@ -2,8 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -13,7 +13,7 @@
 <AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="53.0" text="&lt;-" />
-      <TextField layoutX="253.0" layoutY="53.0" prefHeight="26.0" prefWidth="193.0" />
+      <TextField layoutX="239.0" layoutY="66.0" prefHeight="26.0" prefWidth="221.0" />
       <TableView layoutY="160.0" prefHeight="340.0" prefWidth="700.0">
         <columns>
           <TableColumn prefWidth="96.79995572566986" text="Name" />
@@ -24,21 +24,22 @@
             <TableColumn prefWidth="100.7999267578125" text="Difficulty" />
         </columns>
       </TableView>
-      <ComboBox layoutX="470.0" layoutY="53.0" prefHeight="26.0" prefWidth="54.0" />
-      <Label layoutX="317.0" layoutY="22.0" text="Search:" />
-      <VBox layoutX="120.0" layoutY="94.0" prefHeight="58.0" prefWidth="100.0">
+      <Label layoutX="322.0" layoutY="33.0" text="Search:" />
+      <VBox layoutX="488.0" layoutY="37.0" prefHeight="58.0" prefWidth="100.0">
          <children>
             <CheckBox mnemonicParsing="false" text="Easy" />
             <CheckBox mnemonicParsing="false" text="Medium" />
             <CheckBox mnemonicParsing="false" text="Hard" />
          </children>
       </VBox>
-      <VBox layoutX="220.0" layoutY="94.0" prefHeight="58.0" prefWidth="100.0">
+      <VBox layoutX="586.0" layoutY="37.0" prefHeight="58.0" prefWidth="100.0">
          <children>
             <CheckBox mnemonicParsing="false" text="Loop" />
             <CheckBox mnemonicParsing="false" text="Out and Back" />
             <CheckBox mnemonicParsing="false" text="Point-to-point" />
          </children>
       </VBox>
+      <Slider layoutX="438.0" layoutY="119.0" prefHeight="14.0" prefWidth="100.0" />
+      <Slider layoutX="559.0" layoutY="119.0" prefHeight="14.0" prefWidth="108.0" />
    </children>
 </AnchorPane>

@@ -2,62 +2,73 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label id="Welcome" layoutX="195.0" text="Trail Registration" underline="true" />
-      <GridPane layoutX="66.0" layoutY="106.0" prefHeight="332.0" prefWidth="291.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.5999954223633" minWidth="10.0" prefWidth="137.59998931884766" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="137.60001373291016" minWidth="10.0" prefWidth="63.20001068115235" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="81.60001220703126" minHeight="0.0" prefHeight="60.800018310546875" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="172.8" minHeight="0.0" prefHeight="58.39998168945313" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="231.2" minHeight="10.0" prefHeight="61.60000610351564" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="231.2" minHeight="10.0" prefHeight="56.60002441406249" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="231.2" minHeight="10.0" prefHeight="51.99996337890627" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="231.2" minHeight="10.0" prefHeight="44.80003662109374" vgrow="SOMETIMES" />
-        </rowConstraints>
+<SplitPane dividerPositions="0.32244438186426355" prefHeight="500.0" prefWidth="712.2" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <items>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
-            <Label text="Name:" />
-            <Label text="Address:" GridPane.rowIndex="1" />
-            <Label text="Distance:" GridPane.rowIndex="2" />
-            <Label prefHeight="65.0" prefWidth="136.0" text="E Gain:" GridPane.rowIndex="3" />
-            <Label text="Type:" GridPane.rowIndex="4" />
-            <Label text="Difficulty:" GridPane.rowIndex="5" />
+            <GridPane layoutX="17.0" layoutY="14.0" prefHeight="332.0" prefWidth="291.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.5999954223633" minWidth="10.0" prefWidth="137.59998931884766" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="137.60001373291016" minWidth="10.0" prefWidth="63.20001068115235" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="81.60001220703126" minHeight="0.0" prefHeight="60.800018310546875" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="172.8" minHeight="0.0" prefHeight="63.200018310546874" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="231.2" minHeight="10.0" prefHeight="67.0000244140625" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="231.2" minHeight="10.0" prefHeight="45.39997558593751" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="231.2" minHeight="10.0" prefHeight="51.99996337890627" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="231.2" minHeight="10.0" prefHeight="44.80003662109374" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label text="Name:" />
+                  <Label text="Address:" GridPane.rowIndex="1" />
+                  <Label text="Distance:" GridPane.rowIndex="2" />
+                  <Label prefHeight="65.0" prefWidth="136.0" text="E Gain:" GridPane.rowIndex="3" />
+                  <Label text="Type:" GridPane.rowIndex="4" />
+                  <Label text="Difficulty:" GridPane.rowIndex="5" />
+               </children>
+            </GridPane>
+            <Label contentDisplay="CENTER" layoutX="85.0" layoutY="3.0" text="Trail Info:" />
+            <ImageView fitHeight="138.0" fitWidth="151.0" layoutX="17.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true" />
          </children>
-      </GridPane>
-      <Label contentDisplay="CENTER" layoutX="108.0" layoutY="75.0" text="Trail Info:" />
-      <GridPane layoutX="421.0" layoutY="106.0" prefHeight="332.0" prefWidth="291.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="178.39998779296874" minWidth="10.0" prefWidth="159.99996337890624" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="137.60001373291016" minWidth="10.0" prefWidth="128.00003662109376" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="81.60001220703126" minHeight="0.0" prefHeight="60.800018310546875" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="172.8" minHeight="0.0" prefHeight="58.39998168945313" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="231.2" minHeight="10.0" prefHeight="61.60000610351564" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="231.2" minHeight="10.0" prefHeight="56.60002441406249" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="231.2" minHeight="10.0" prefHeight="51.99996337890627" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="231.2" minHeight="10.0" prefHeight="44.80003662109374" vgrow="SOMETIMES" />
-         </rowConstraints>
+      </AnchorPane>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="414.0">
          <children>
-            <Label prefHeight="30.0" prefWidth="151.0" text="Date/Time Start:" />
-            <Label GridPane.rowIndex="1" />
-            <Label prefHeight="30.0" prefWidth="150.0" text="Distance Hiked:" GridPane.rowIndex="2" />
-            <Label prefHeight="57.0" prefWidth="149.0" text="Hike Durantion:" GridPane.rowIndex="3" />
-            <Label text="Average Pace:" GridPane.rowIndex="4" />
-            <Label text="Pictures Taken: " GridPane.rowIndex="5" />
-            <Label prefHeight="30.0" prefWidth="162.0" text="Date/Time Finish:" GridPane.rowIndex="1" />
+            <GridPane layoutX="106.0" layoutY="83.0" prefHeight="332.0" prefWidth="291.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="178.39998779296874" minWidth="10.0" prefWidth="159.99996337890624" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="137.60001373291016" minWidth="10.0" prefWidth="128.00003662109376" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="81.60001220703126" minHeight="0.0" prefHeight="60.800018310546875" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="172.8" minHeight="0.0" prefHeight="58.39998168945313" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="231.2" minHeight="10.0" prefHeight="61.60000610351564" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="231.2" minHeight="10.0" prefHeight="56.60002441406249" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="231.2" minHeight="10.0" prefHeight="51.99996337890627" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="231.2" minHeight="10.0" prefHeight="44.80003662109374" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label prefHeight="30.0" prefWidth="151.0" text="Date/Time Start:" />
+                  <Label GridPane.rowIndex="1" />
+                  <Label prefHeight="30.0" prefWidth="150.0" text="Distance Hiked:" GridPane.rowIndex="2" />
+                  <Label prefHeight="57.0" prefWidth="149.0" text="Hike Durantion:" GridPane.rowIndex="3" />
+                  <Label text="Average Pace:" GridPane.rowIndex="4" />
+                  <Label text="Pictures Taken: " GridPane.rowIndex="5" />
+                  <Label prefHeight="30.0" prefWidth="162.0" text="Date/Time Finish:" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+            <Button layoutX="134.0" layoutY="442.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="87.0" text="Cancel" />
+            <Label id="Welcome" layoutX="98.0" layoutY="14.0" text="Trail Registration" underline="true" />
+            <Label layoutX="168.0" layoutY="60.0" text="Personal Info:" />
+            <Button layoutX="240.0" layoutY="442.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="87.0" text="Register Hike" />
          </children>
-      </GridPane>
-      <Label layoutX="505.0" layoutY="75.0" text="Personal Info:" />
-      <Button layoutX="255.0" layoutY="442.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="87.0" text="Cancel" />
-      <Button layoutX="364.0" layoutY="442.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="87.0" text="Register Hike" />
-   </children>
-</AnchorPane>
+      </AnchorPane>
+   </items>
+</SplitPane>
