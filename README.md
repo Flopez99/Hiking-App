@@ -1,3 +1,4 @@
 # Hiking-App
 
-## Smaller
+## This is an app created for my CSE248 class! :)
+
