@@ -36,40 +36,40 @@ public class User implements Serializable {
 		profilePicture = null;
 	}
 
-	public SimpleStringProperty getUserName() {
-		return userName;
+	public String getUserName() {
+		return userName.get();
 	}
 
 	public void setUserName(SimpleStringProperty userName) {
 		this.userName = userName;
 	}
 
-	public SimpleStringProperty getfName() {
-		return fName;
+	public String getFName() {
+		return fName.get();
 	}
 
 	public void setfName(SimpleStringProperty fName) {
 		this.fName = fName;
 	}
 
-	public SimpleStringProperty getlName() {
-		return lName;
+	public String getLName() {
+		return lName.get();
 	}
 
 	public void setlName(SimpleStringProperty lName) {
 		this.lName = lName;
 	}
 
-	public SimpleStringProperty getAddress() {
-		return address;
+	public String getAddress() {
+		return address.get();
 	}
 
 	public void setAddress(SimpleStringProperty address) {
 		this.address = address;
 	}
 
-	public SimpleStringProperty getPhone() {
-		return phone;
+	public String getPhone() {
+		return phone.get();
 	}
 
 	public void setPhone(SimpleStringProperty phone) {

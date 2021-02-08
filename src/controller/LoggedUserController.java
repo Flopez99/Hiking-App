@@ -26,7 +26,7 @@ public class LoggedUserController implements Initializable {
 	public Label fName;
 	
 	public void changeNameLabel() {
-		fName.setText(loggedUser.getfName().get());
+		fName.setText(loggedUser.getFName());
 	}
 	
 	

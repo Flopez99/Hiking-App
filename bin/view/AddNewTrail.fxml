@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HikeRegisterController">
+   <children>
+      <HBox alignment="CENTER" layoutX="250.0" layoutY="415.0" prefHeight="65.0" prefWidth="200.0" spacing="25.0">
+         <children>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#changeSceneManagement" prefHeight="50.0" prefWidth="90.0" text="Cancel" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#createNewTrail" prefHeight="50.0" prefWidth="90.0" text="Create Trail" />
+         </children>
+      </HBox>
+      <Label id="Welcome" layoutX="173.0" layoutY="14.0" text="New Trail Registration" underline="true" />
+      <VBox layoutX="75.0" layoutY="154.0" prefHeight="270.0" prefWidth="174.0" spacing="10.0">
+         <children>
+            <Label prefHeight="22.0" prefWidth="121.0" text="Trail Name:" />
+            <TextField fx:id="trailName" />
+            <Label prefHeight="22.0" prefWidth="154.0" text="Trail Head Address:" />
+            <TextField fx:id="trailAddress" />
+            <Label prefHeight="22.0" prefWidth="178.0" text="Total Distance:" />
+            <TextField fx:id="trailDistance" />
+         </children>
+      </VBox>
+      <Circle fill="DODGERBLUE" layoutX="350.0" layoutY="105.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+      <Button layoutX="394.0" layoutY="92.0" mnemonicParsing="false" text="Edit" />
+      <VBox layoutX="461.0" layoutY="154.0" prefHeight="270.0" prefWidth="173.0" spacing="10.0">
+         <children>
+            <Label prefHeight="22.0" prefWidth="150.0" text="Elevation Gain:" />
+            <PasswordField fx:id="trailEGain" />
+            <Label prefHeight="22.0" prefWidth="121.0" text="Trail Type:" />
+            <ComboBox prefHeight="0.0" prefWidth="174.0">
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Point-to-Point" />
+                      <MenuItem mnemonicParsing="false" text="Loop" />
+                      <MenuItem mnemonicParsing="false" text="Out and Back" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
+            </ComboBox>
+            <Label prefHeight="22.0" prefWidth="121.0" text="Difficulty:" />
+            <ComboBox prefHeight="0.0" prefWidth="174.0">
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Easy" />
+                      <MenuItem mnemonicParsing="false" text="Moderate" />
+                      <MenuItem mnemonicParsing="false" text="Hard" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
+            </ComboBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

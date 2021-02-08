@@ -10,36 +10,36 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddHikeController">
    <children>
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="53.0" text="&lt;-" />
-      <TextField layoutX="239.0" layoutY="66.0" prefHeight="26.0" prefWidth="221.0" />
-      <TableView layoutY="160.0" prefHeight="340.0" prefWidth="700.0">
+      <TextField fx:id="searchBar" layoutX="239.0" layoutY="66.0" prefHeight="26.0" prefWidth="221.0" />
+      <TableView fx:id="trailTable" layoutY="160.0" prefHeight="340.0" prefWidth="700.0">
         <columns>
-          <TableColumn prefWidth="96.79995572566986" text="Name" />
-          <TableColumn prefWidth="148.00000762939453" text="Address" />
-            <TableColumn prefWidth="105.5999755859375" text="Distance" />
-            <TableColumn prefWidth="148.800048828125" text="Elevation Gain" />
-            <TableColumn prefWidth="104.79995727539062" text="Type" />
-            <TableColumn prefWidth="100.7999267578125" text="Difficulty" />
+          <TableColumn fx:id="trailNameColumn" prefWidth="96.79995572566986" text="Name" />
+          <TableColumn fx:id="trailAddressColumn" prefWidth="148.00000762939453" text="Address" />
+            <TableColumn fx:id="distanceColumn" prefWidth="105.5999755859375" text="Distance" />
+            <TableColumn fx:id="elevationGainColumn" prefWidth="148.800048828125" text="Elevation Gain" />
+            <TableColumn fx:id="typeColumn" prefWidth="104.79995727539062" text="Type" />
+            <TableColumn fx:id="difficultyColumn" prefWidth="100.7999267578125" text="Difficulty" />
         </columns>
       </TableView>
       <Label layoutX="322.0" layoutY="33.0" text="Search:" />
       <VBox layoutX="488.0" layoutY="37.0" prefHeight="58.0" prefWidth="100.0">
          <children>
-            <CheckBox mnemonicParsing="false" text="Easy" />
-            <CheckBox mnemonicParsing="false" text="Medium" />
-            <CheckBox mnemonicParsing="false" text="Hard" />
+            <CheckBox fx:id="easyChoice" mnemonicParsing="false" text="Easy" />
+            <CheckBox fx:id="mediumChoice" mnemonicParsing="false" text="Medium" />
+            <CheckBox fx:id="hardChoice" mnemonicParsing="false" text="Hard" />
          </children>
       </VBox>
       <VBox layoutX="586.0" layoutY="37.0" prefHeight="58.0" prefWidth="100.0">
          <children>
-            <CheckBox mnemonicParsing="false" text="Loop" />
-            <CheckBox mnemonicParsing="false" text="Out and Back" />
-            <CheckBox mnemonicParsing="false" text="Point-to-point" />
+            <CheckBox fx:id="loopChoice" mnemonicParsing="false" text="Loop" />
+            <CheckBox fx:id="outAndBackChoice" mnemonicParsing="false" text="Out and Back" />
+            <CheckBox mnemonicParsing="false" onAction="#pToPChoice" text="Point-to-point" />
          </children>
       </VBox>
-      <Slider layoutX="438.0" layoutY="119.0" prefHeight="14.0" prefWidth="100.0" />
-      <Slider layoutX="559.0" layoutY="119.0" prefHeight="14.0" prefWidth="108.0" />
+      <Slider fx:id="distanceSlider" layoutX="482.0" layoutY="119.0" prefHeight="14.0" prefWidth="100.0" />
+      <Slider fx:id="elevationGainSlider" layoutX="582.0" layoutY="119.0" prefHeight="14.0" prefWidth="108.0" />
    </children>
 </AnchorPane>
