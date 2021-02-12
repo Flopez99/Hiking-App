@@ -12,6 +12,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Data;
@@ -25,14 +28,20 @@ public class HikeRegisterController implements Initializable {
 
 	@FXML
 	private TextField trailName, trailAddress, trailDistance, trailEGain;
+	@FXML
+	private ComboBox<Type> trailTypeBox;
+	@FXML
+	private ComboBox<Difficulty> difficultyBox;
 
 	public void createNewTrail(ActionEvent event) {
 		String name = trailName.getText();
 		String address = trailAddress.getText();
 		double distance = Double.parseDouble(trailDistance.getText());
 		double eGain = Double.parseDouble(trailEGain.getText());
-
-		Trail newTrail = new Trail(name, address, distance, eGain, Type.LOOP, Difficulty.HARD);
+		Type type = trailTypeBox.getValue();
+		Difficulty difficulty = difficultyBox.getValue();
+		
+		Trail newTrail = new Trail(name, address, distance, eGain, type, difficulty);
 
 		trails.put(name, newTrail);
 		
@@ -50,6 +59,12 @@ public class HikeRegisterController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		trails = Data.getTrails();
+		
+		
+		trailTypeBox.getItems().removeAll(trailTypeBox.getItems());
+		trailTypeBox.getItems().addAll(Type.LOOP, Type.POINT_TO_POINT, Type.OUT_AND_BACK);
+		difficultyBox.getItems().removeAll(difficultyBox.getItems());
+		difficultyBox.getItems().addAll(Difficulty.EASY, Difficulty.MODERATE, Difficulty.HARD);
 	}
 
 }

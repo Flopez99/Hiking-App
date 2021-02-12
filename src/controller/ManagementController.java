@@ -26,6 +26,7 @@ import model.Difficulty;
 import model.Trail;
 import model.Type;
 import model.User;
+import model.Utilities;
 
 public class ManagementController implements Initializable {
 	private static User loggedUser;
@@ -61,7 +62,7 @@ public class ManagementController implements Initializable {
 	ObservableList<Trail> trailList = FXCollections.observableArrayList();
 
 	@FXML
-	void changeSceneAddNewHike(ActionEvent event) throws IOException {
+	void changeSceneAddNewTrail(ActionEvent event) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("/view/AddNewTrail.fxml"));
 		Scene scene = new Scene(root);
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -80,7 +81,7 @@ public class ManagementController implements Initializable {
 	}
 
 	@FXML
-	void changeSceneViewHike(ActionEvent event) {
+	void changeSceneViewTrail(ActionEvent event) {
 
 	}
 
@@ -113,6 +114,9 @@ public class ManagementController implements Initializable {
 		trails = Data.getTrails();
 		loggedUser = Data.getLoggedUser();
 
+		Utilities.fillUserMap(users);
+		Utilities.fillTrailMap(trails);
+		
 		usernameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("userName"));
 		firstNameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("fName"));
 		lastNameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("lName"));

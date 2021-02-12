@@ -38,19 +38,9 @@
             <Label prefHeight="22.0" prefWidth="150.0" text="Elevation Gain:" />
             <PasswordField fx:id="trailEGain" />
             <Label prefHeight="22.0" prefWidth="121.0" text="Trail Type:" />
-            <ComboBox prefHeight="0.0" prefWidth="174.0">
-               <contextMenu>
-                  <ContextMenu>
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Point-to-Point" />
-                      <MenuItem mnemonicParsing="false" text="Loop" />
-                      <MenuItem mnemonicParsing="false" text="Out and Back" />
-                    </items>
-                  </ContextMenu>
-               </contextMenu>
-            </ComboBox>
+            <ComboBox fx:id="trailTypeBox" prefHeight="0.0" prefWidth="174.0" />
             <Label prefHeight="22.0" prefWidth="121.0" text="Difficulty:" />
-            <ComboBox prefHeight="0.0" prefWidth="174.0">
+            <ComboBox fx:id="difficultyBox" prefHeight="0.0" prefWidth="174.0">
                <contextMenu>
                   <ContextMenu>
                     <items>

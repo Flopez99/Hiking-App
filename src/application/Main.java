@@ -13,7 +13,6 @@ import model.User;
 
 public class Main extends Application {
 	public static Data data;
-	private static TreeMap<String, User> users;
 
 	
 	public static void main(String[] args) {
