@@ -23,7 +23,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		data = new Data();
 		
-		Parent root = FXMLLoader.load(getClass().getResource("/view/TrailRegister.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/view/AdminLogged.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("World of Hiking");
 		primaryStage.setResizable(false);

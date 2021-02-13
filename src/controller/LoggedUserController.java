@@ -31,7 +31,6 @@ public class LoggedUserController implements Initializable {
 	
 	
 	public void changeSceneManagement(ActionEvent e) throws IOException {
-		loggedUser = null;
 		Parent root = FXMLLoader.load(getClass().getResource("/view/Management.fxml"));
 		Scene scene = new Scene(root);
 		Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
@@ -40,8 +39,15 @@ public class LoggedUserController implements Initializable {
 		
 	}
 	public void changeSceneTrailRegister(ActionEvent e) throws IOException {
-		loggedUser = null;
 		Parent root = FXMLLoader.load(getClass().getResource("/view/TrailRegister.fxml"));
+		Scene scene = new Scene(root);
+		Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
+		window.setScene(scene);
+		window.show();
+		
+	}
+	public void changeSceneViewAccount(ActionEvent e) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("/view/ViewAccount.fxml"));
 		Scene scene = new Scene(root);
 		Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
 		window.setScene(scene);

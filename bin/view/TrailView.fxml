@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<SplitPane dividerPositions="0.32244438186426355" prefHeight="500.0" prefWidth="712.2" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane dividerPositions="0.36891016615038014" prefHeight="500.0" prefWidth="712.2" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewHikeController">
    <items>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
-            <GridPane layoutX="17.0" layoutY="14.0" prefHeight="332.0" prefWidth="291.0">
+            <GridPane layoutY="25.0" prefHeight="332.0" prefWidth="259.0">
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.5999954223633" minWidth="10.0" prefWidth="137.59998931884766" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="137.60001373291016" minWidth="10.0" prefWidth="63.20001068115235" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.5999954223633" minWidth="10.0" prefWidth="88.8" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.79998779296878" minWidth="10.0" prefWidth="171.2" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints maxHeight="81.60001220703126" minHeight="0.0" prefHeight="60.800018310546875" vgrow="SOMETIMES" />
@@ -33,18 +36,23 @@
                   <Label prefHeight="65.0" prefWidth="136.0" text="E Gain:" GridPane.rowIndex="3" />
                   <Label text="Type:" GridPane.rowIndex="4" />
                   <Label text="Difficulty:" GridPane.rowIndex="5" />
+                  <Label fx:id="trailName" text="Label" GridPane.columnIndex="1" />
+                  <Label fx:id="trailAdress" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="trailDistance" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="trailEGain" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="trailType" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label fx:id="trailDifficulty" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                </children>
             </GridPane>
             <Label contentDisplay="CENTER" layoutX="85.0" layoutY="3.0" text="Trail Info:" />
-            <ImageView fitHeight="138.0" fitWidth="151.0" layoutX="17.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="138.0" fitWidth="151.0" layoutX="14.0" layoutY="357.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="414.0">
          <children>
-            <GridPane layoutX="106.0" layoutY="83.0" prefHeight="332.0" prefWidth="291.0">
+            <GridPane layoutX="59.0" layoutY="74.0" prefHeight="332.0" prefWidth="149.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="178.39998779296874" minWidth="10.0" prefWidth="159.99996337890624" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="137.60001373291016" minWidth="10.0" prefWidth="128.00003662109376" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints maxHeight="81.60001220703126" minHeight="0.0" prefHeight="60.800018310546875" vgrow="SOMETIMES" />
@@ -58,16 +66,28 @@
                   <Label prefHeight="30.0" prefWidth="151.0" text="Date/Time Start:" />
                   <Label GridPane.rowIndex="1" />
                   <Label prefHeight="30.0" prefWidth="150.0" text="Distance Hiked:" GridPane.rowIndex="2" />
-                  <Label prefHeight="57.0" prefWidth="149.0" text="Hike Durantion:" GridPane.rowIndex="3" />
+                  <Label prefHeight="57.0" prefWidth="149.0" text="Hike Duration:" GridPane.rowIndex="3" />
                   <Label text="Average Pace:" GridPane.rowIndex="4" />
                   <Label text="Pictures Taken: " GridPane.rowIndex="5" />
                   <Label prefHeight="30.0" prefWidth="162.0" text="Date/Time Finish:" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <Button layoutX="134.0" layoutY="442.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="87.0" text="Cancel" />
-            <Label id="Welcome" layoutX="98.0" layoutY="14.0" text="Trail Registration" underline="true" />
-            <Label layoutX="168.0" layoutY="60.0" text="Personal Info:" />
-            <Button layoutX="240.0" layoutY="442.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="87.0" text="Register Hike" />
+            <Button layoutX="134.0" layoutY="442.0" mnemonicParsing="false" onAction="#changeSceneTrailRegister" prefHeight="44.0" prefWidth="87.0" text="Cancel" />
+            <Label id="Welcome" layoutX="98.0" text="Hike Registration" underline="true" />
+            <Label layoutX="168.0" layoutY="60.0" text="Trip Info:" />
+            <Button layoutX="240.0" layoutY="442.0" mnemonicParsing="false" onAction="#registerHike" prefHeight="44.0" prefWidth="87.0" text="Register Hike" />
+            <TextField fx:id="hikeDuration" layoutX="223.0" layoutY="273.0" prefHeight="26.0" prefWidth="87.0" />
+            <TextField fx:id="distanceHiked" layoutX="223.0" layoutY="214.0" prefHeight="26.0" prefWidth="87.0" />
+            <TextField fx:id="averagePace" layoutX="223.0" layoutY="330.0" prefHeight="26.0" prefWidth="87.0" />
+            <Button layoutX="223.0" layoutY="381.0" mnemonicParsing="false" onAction="#selectPicture" prefHeight="26.0" prefWidth="87.0" text="Add Pictures" />
+            <DatePicker fx:id="dateStart" layoutX="221.0" layoutY="93.0" prefHeight="26.0" prefWidth="87.0" />
+            <DatePicker fx:id="dateEnd" layoutX="221.0" layoutY="154.0" prefHeight="26.0" prefWidth="87.0" />
+            <TextField fx:id="hourStart" layoutX="310.0" layoutY="93.0" prefHeight="26.0" prefWidth="35.0" />
+            <TextField fx:id="minuteStart" layoutX="346.0" layoutY="93.0" prefHeight="26.0" prefWidth="35.0" />
+            <ComboBox fx:id="amPmStart" layoutX="382.0" layoutY="93.0" prefHeight="26.0" prefWidth="8.0" />
+            <TextField fx:id="hourEnd" layoutX="310.0" layoutY="154.0" prefHeight="26.0" prefWidth="35.0" />
+            <TextField fx:id="minuteEnd" layoutX="346.0" layoutY="154.0" prefHeight="26.0" prefWidth="35.0" />
+            <ComboBox fx:id="amPmEnd" layoutX="382.0" layoutY="154.0" prefHeight="26.0" prefWidth="8.0" />
          </children>
       </AnchorPane>
    </items>

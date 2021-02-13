@@ -192,6 +192,8 @@ public class AddHikeController implements Initializable {
 		typeChoiceBox.getItems().removeAll(typeChoiceBox.getItems());
 		typeChoiceBox.getItems().addAll(Type.LOOP, Type.POINT_TO_POINT, Type.OUT_AND_BACK);
 
+		System.out.println(loggedUser.getHistoryMap());
+
 	}
 
 }

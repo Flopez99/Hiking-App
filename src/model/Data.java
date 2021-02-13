@@ -15,7 +15,8 @@ public class Data {
 		trails = new HashMap<String, Trail>(100000);
 		trails.put("Rosh Pit",
 				new Trail("Rosh Pit", "1711 Avalon Pines Dr", 12344.0, 1000, Type.LOOP, Difficulty.HARD));
-		loggedUser = null;
+		loggedUser = users.get("user");
+		loggedUser.getHistoryMap().add(new Hike("name", "dateTimeStart","dateTimeEnd", "hikingDistance + ", "duration + ","hikeAveragePace + ", null));
 		pickedTrail = null;
 	}
 

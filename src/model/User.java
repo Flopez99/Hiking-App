@@ -3,6 +3,7 @@ package model;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.Image;
@@ -17,11 +18,9 @@ public class User implements Serializable {
 	private boolean isActive;
 	private Role role;
 	private String password;
-	private LinkedList<Trail> history;
-	private TreeMap<String, Trail> historyMap;
+	private LinkedList<Hike> historyMap;
 	private String profilePicture;
 
-	private LinkedList<Trail> currentTrail;
 
 	public User(String fName, String lName, String pNumber, String userName, String password, Role role) {
 		this.userName = new SimpleStringProperty(userName);
@@ -31,9 +30,8 @@ public class User implements Serializable {
 		this.role = role;
 		this.password = password;
 		isActive = true;
-		this.history = history;
-		currentTrail = new LinkedList<Trail>();
 		profilePicture = null;
+		historyMap = new LinkedList<Hike>();
 	}
 
 	public String getUserName() {
@@ -100,19 +98,11 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public LinkedList<Trail> getHistory() {
-		return history;
-	}
-
-	public void setHistory(LinkedList<Trail> history) {
-		this.history = history;
-	}
-
-	public TreeMap<String, Trail> getHistoryMap() {
+	public LinkedList<Hike> getHistoryMap() {
 		return historyMap;
 	}
 
-	public void setHistoryMap(TreeMap<String, Trail> historyMap) {
+	public void setHistoryMap(LinkedList<Hike> historyMap) {
 		this.historyMap = historyMap;
 	}
 
@@ -124,13 +114,7 @@ public class User implements Serializable {
 		this.profilePicture = profilePicture;
 	}
 
-	public LinkedList<Trail> getCurrentTrail() {
-		return currentTrail;
-	}
 
-	public void setCurrentTrail(LinkedList<Trail> currentTrail) {
-		this.currentTrail = currentTrail;
-	}
 
 	@Override
 	public String toString() {
