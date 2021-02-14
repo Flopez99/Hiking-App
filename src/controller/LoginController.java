@@ -20,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -31,6 +32,7 @@ import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 import model.Data;
 import model.Role;
+import model.Type;
 import model.User;
 
 public class LoginController implements Initializable {
@@ -40,6 +42,9 @@ public class LoginController implements Initializable {
 	private static String imagePath;
 	@FXML
 	private TextField usernameField, passwordField, userName, password, phoneNumber, firstName, lastName;
+
+	@FXML
+	private ComboBox<SkillLevel> skillLevel;
 
 	@FXML
 	private ImageView profilePicture;
@@ -62,9 +67,9 @@ public class LoginController implements Initializable {
 
 		User user = new User(fName, lName, pNumber, uName, pWord, role);
 
-		if(imagePath != null) {
+		if (imagePath != null) {
 			user.setProfilePicture(imagePath);
-		}else {
+		} else {
 			user.setProfilePicture("Pictures/defaultUser.jpg");
 		}
 		System.out.println(user);
@@ -164,9 +169,12 @@ public class LoginController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		users = Data.getUsers();
 
-		System.out.println(signingUp);
-
+			
+		
+		
 		if (signingUp) {
+			skillLevel.getItems().removeAll(skillLevel.getItems());
+			skillLevel.getItems().addAll(SkillLevel.AMATEUR, SkillLevel.EXPERIENCED,SkillLevel.PROFESIONAL);	
 			BufferedImage imageB = null;
 			try {
 				imageB = ImageIO.read(new File("Pictures/defaultUser.jpg"));

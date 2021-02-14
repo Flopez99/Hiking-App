@@ -1,22 +1,22 @@
 package model;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.TreeMap;
 
 public class Data {
 	private static TreeMap<String, User> users;
-	private static HashMap<String, Trail> trails;
+	private static HashSet<Trail> trails;
 	private static User loggedUser;
 	private static Trail pickedTrail;
 
 	public Data() {
 		users = new TreeMap<String, User>();
 		users.put("user", new User("Lorenzo", "Malo", "123465234", "user", "password", Role.ADMIN));
-		trails = new HashMap<String, Trail>(100000);
-		trails.put("Rosh Pit",
-				new Trail("Rosh Pit", "1711 Avalon Pines Dr", 12344.0, 1000, Type.LOOP, Difficulty.HARD));
+		trails = new HashSet<Trail>(100000);
+		trails.add(new Trail("Rosh Pit", "1711 Avalon Pines Dr", 50, 60, Type.LOOP, Difficulty.HARD));
 		loggedUser = users.get("user");
-		loggedUser.getHistoryMap().add(new Hike("name", "dateTimeStart","dateTimeEnd", "hikingDistance + ", "duration + ","hikeAveragePace + ", null));
+		//loggedUser.getHistoryMap().add(new Hike("name", "dateTimeStart","dateTimeEnd", "hikingDistance + ", "duration + ","hikeAveragePace + ", null));
 		pickedTrail = null;
 	}
 
@@ -28,11 +28,11 @@ public class Data {
 		Data.pickedTrail = pickedTrail;
 	}
 
-	public static HashMap<String, Trail> getTrails() {
+	public static HashSet<Trail> getTrails() {
 		return trails;
 	}
 
-	public static void setTrails(HashMap<String, Trail> trails) {
+	public static void setTrails(HashSet<Trail> trails) {
 		Data.trails = trails;
 	}
 

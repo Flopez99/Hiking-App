@@ -3,6 +3,8 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
@@ -31,7 +33,7 @@ import model.Utilities;
 public class ManagementController implements Initializable {
 	private static User loggedUser;
 	private TreeMap<String, User> users;
-	private HashMap<String, Trail> trails;
+	private HashSet<Trail> trails;
 
 	@FXML
 	private TableView<User> userTable;
@@ -130,16 +132,14 @@ public class ManagementController implements Initializable {
 		difficultyColumn.setCellValueFactory(new PropertyValueFactory<Trail, String>("difficulty"));
 
 		
-		Map<String, Trail> result1 = null;
-		result1 = (Data.getTrails().entrySet().stream()
-				.collect(Collectors.toMap(map -> map.getKey(), map -> map.getValue())));
+		List<Trail> result1 = null;
+		result1 = (Data.getTrails().stream()
+				.collect(Collectors.toList()));
 
-		for (java.util.Map.Entry<String, Trail> entry : result1.entrySet()) {
-			trailList.add(entry.getValue());
+		ObservableList<Trail> observableList = FXCollections.observableList(result1);
 
-		}
 		
-		trailTable.setItems(trailList);
+		trailTable.setItems(observableList);
 		
 		Map<String, User> result = null;
 		result = (Data.getUsers().entrySet().stream()

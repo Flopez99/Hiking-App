@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -76,7 +77,7 @@ public class Utilities {
 
 	}
 	
-	public static void fillTrailMap(HashMap<String, Trail> trails) {
+	public static void fillTrailMap(HashSet<Trail> trails) {
 		int index = 0;
 		Random rand = new Random();
 		Difficulty[] difficulty = {Difficulty.EASY,Difficulty.MODERATE,Difficulty.HARD};
@@ -91,7 +92,7 @@ public class Utilities {
 		
 		Trail newTrail = new Trail(trailName, address, distance, eGain, type[rand.nextInt(3)], difficulty[rand.nextInt(3)]);
 		
-		trails.put(trailName, newTrail);
+		trails.add(newTrail);
 		index++;
 		}
 	}

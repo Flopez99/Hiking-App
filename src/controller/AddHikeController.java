@@ -3,8 +3,11 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
@@ -36,6 +39,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import model.Data;
 import model.Difficulty;
+import model.Role;
 import model.Trail;
 import model.Type;
 import model.User;
@@ -44,7 +48,7 @@ import model.Utilities;
 public class AddHikeController implements Initializable {
 	private static User loggedUser;
 	private TreeMap<String, User> users;
-	private HashMap<String, Trail> trails;
+	private HashSet<Trail> trails;
 	@FXML
 	private Parent root;
 	@FXML
@@ -65,13 +69,16 @@ public class AddHikeController implements Initializable {
 	private TableColumn<Trail, String> difficultyColumn;
 
 	@FXML
-	private Slider distanceSlider, elevationGainSlider;
+	private Slider distanceSlider, eGainSlider;
 	@FXML
 	private Label distanceLabel, eGainLabel;
 	@FXML
 	private TextField searchBar;
 
-	ObservableList<Trail> trailList = FXCollections.observableArrayList();
+	List<Trail> nameList = FXCollections.observableArrayList();
+	List<Trail> difficultyList = FXCollections.observableArrayList();
+	List<Trail> typeList = FXCollections.observableArrayList();
+	List<Trail> finalList = FXCollections.observableArrayList();
 
 	@FXML
 	private CheckComboBox<Difficulty> difficultyChoiceBox;
@@ -79,57 +86,68 @@ public class AddHikeController implements Initializable {
 	private CheckComboBox<Type> typeChoiceBox;
 
 	@FXML
-	void changeSceneUserLoggedIn(ActionEvent event) {
+	void changeSceneUserLoggedIn(ActionEvent event) throws IOException {
+		Parent secondRoot = null;
+		if (loggedUser.getRole().equals(Role.ADMIN)) {
+			secondRoot = FXMLLoader.load(getClass().getResource("/view/AdminLogged.fxml"));
+		} else {
+			secondRoot = FXMLLoader.load(getClass().getResource("/view/LoggedIn.fxml"));
 
+		}
+		Scene secondScene = new Scene(secondRoot);
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		window.setScene(secondScene);
+		window.show();
 	}
 
 	public void trailSearch(KeyEvent event) {
-		trailList.clear();
-		Map<String, Trail> result = null;
+		nameList.clear();
+		difficultyList.clear();
+		typeList.clear();
+		finalList.clear();
 
-		ObservableList<Difficulty> difficultyList = difficultyChoiceBox.getCheckModel().getCheckedItems();
-		ObservableList<Type> typeList = typeChoiceBox.getCheckModel().getCheckedItems();
+		ObservableList<Difficulty> difficultyOption = difficultyChoiceBox.getCheckModel().getCheckedItems();
+		ObservableList<Type> typeOption = typeChoiceBox.getCheckModel().getCheckedItems();
 
-		if (difficultyList.contains(Difficulty.EASY)) {
+		nameList = (Data.getTrails().stream()
+				.filter(map -> map.getName().toLowerCase().startsWith(searchBar.getText().toLowerCase())))
+						.collect(Collectors.toList());
 
-			result = (Data.getTrails().entrySet().stream()
-					.filter(map -> map.getValue().getDifficulty().equals(Difficulty.EASY.toString()))
-					.filter(map -> map.getKey().toLowerCase().startsWith(searchBar.getText().toLowerCase()))
-					.collect(Collectors.toMap(map -> map.getKey(), map -> map.getValue())));
-			for (java.util.Map.Entry<String, Trail> entry : result.entrySet()) {
-				trailList.add(entry.getValue());
-			}
-		}
-		if (difficultyList.contains(Difficulty.MODERATE)) {
-			result = (Data.getTrails().entrySet().stream()
-					.filter(map -> map.getValue().getDifficulty().equals(Difficulty.MODERATE.toString()))
-					.filter(map -> map.getKey().toLowerCase().startsWith(searchBar.getText().toLowerCase()))
-					.collect(Collectors.toMap(map -> map.getKey(), map -> map.getValue())));
-			for (java.util.Map.Entry<String, Trail> entry : result.entrySet()) {
-				trailList.add(entry.getValue());
-			}
-
-		}
-		if (difficultyList.contains(Difficulty.HARD)) {
-			result = (Data.getTrails().entrySet().stream()
-					.filter(map -> map.getValue().getDifficulty().equals(Difficulty.HARD.toString()))
-					.filter(map -> map.getKey().toLowerCase().startsWith(searchBar.getText().toLowerCase()))
-					.collect(Collectors.toMap(map -> map.getKey(), map -> map.getValue())));
-			for (java.util.Map.Entry<String, Trail> entry : result.entrySet()) {
-				trailList.add(entry.getValue());
-			}
-
-		}
-		if (difficultyList.isEmpty()) {
-			result = (Data.getTrails().entrySet().stream()
-					.filter(map -> map.getKey().toLowerCase().startsWith(searchBar.getText().toLowerCase()))
-					.collect(Collectors.toMap(map -> map.getKey(), map -> map.getValue())));
-			for (java.util.Map.Entry<String, Trail> entry : result.entrySet()) {
-				trailList.add(entry.getValue());
-			}
+		if (difficultyOption.size() == 2) {
+			difficultyList = (nameList.stream()
+					.filter(trail -> trail.getDifficulty().equals(difficultyOption.get(0).toString())
+							|| trail.getDifficulty().equals(difficultyOption.get(1).toString()))
+					.collect(Collectors.toList()));
+		} else if (difficultyOption.size() == 1) {
+			difficultyList = (nameList.stream()
+					.filter(trail -> trail.getDifficulty().equals(difficultyOption.get(0).toString()))
+					.collect(Collectors.toList()));
+		} else if (difficultyOption.size() == 0 || difficultyOption.size() == 3) {
+			difficultyList = nameList;
 		}
 
-		trailTable.setItems(trailList);
+		if (typeOption.size() == 2) {
+			typeList = (difficultyList.stream().filter(trail -> trail.getType().equals(typeOption.get(0).toString())
+					|| trail.getType().equals(typeOption.get(1).toString())).collect(Collectors.toList()));
+		} else if (typeOption.size() == 1) {
+			typeList = (difficultyList.stream().filter(trail -> trail.getType().equals(typeOption.get(0).toString()))
+					.collect(Collectors.toList()));
+		} else if (typeOption.size() == 0 || (typeOption.size() == 3)) {
+			typeList = difficultyList;
+		}
+
+		// if(distanceSlider.getValue() != 0 || eGainSlider.getValue())
+
+		finalList = (typeList.stream()
+				.filter(trail -> trail.getDistance() >= distanceSlider.getValue())
+				.filter(trail -> trail.getElevationGain() >= eGainSlider.getValue())
+				.collect(Collectors.toList()));
+
+		ObservableList<Trail> observableList = FXCollections.observableList(finalList);
+//		typeList = (ObservableList<Trail>) (typeList.stream()
+//				.filter(map -> map.getDistance()).collect(Collectors.toList()));
+
+		trailTable.setItems(observableList);
 
 	}
 
@@ -142,7 +160,7 @@ public class AddHikeController implements Initializable {
 			}
 		});
 
-		elevationGainSlider.valueProperty().addListener(new ChangeListener<Number>() {
+		eGainSlider.valueProperty().addListener(new ChangeListener<Number>() {
 
 			@Override
 			public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
@@ -172,7 +190,7 @@ public class AddHikeController implements Initializable {
 		users = Data.getUsers();
 		trails = Data.getTrails();
 		loggedUser = Data.getLoggedUser();
-
+		
 		Utilities.fillTrailMap(trails);
 
 		changeLabel();

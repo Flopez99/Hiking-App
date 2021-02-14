@@ -1,10 +1,15 @@
 package controller;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 
+import javax.imageio.ImageIO;
+
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +18,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 import model.Data;
 import model.User;
@@ -24,11 +32,24 @@ public class LoggedUserController implements Initializable {
 	
 	@FXML
 	public Label fName;
+	@FXML
+	public ImageView userPicture;
+	
 	
 	public void changeNameLabel() {
 		fName.setText(loggedUser.getFName());
 	}
 	
+	public void showUserImage() {
+		try {
+			BufferedImage bufferedImage = ImageIO.read(new File(loggedUser.getProfilePicture()));
+			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+			userPicture.setImage(image);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public void changeSceneManagement(ActionEvent e) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("/view/Management.fxml"));
@@ -68,6 +89,7 @@ public class LoggedUserController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		users = Data.getUsers();
 		loggedUser = Data.getLoggedUser();
+		showUserImage();
 		changeNameLabel();
 	}
 

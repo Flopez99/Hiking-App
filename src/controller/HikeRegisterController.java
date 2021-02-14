@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -24,7 +25,7 @@ import model.Type;
 
 public class HikeRegisterController implements Initializable {
 
-	private HashMap<String, Trail> trails;
+	private HashSet<Trail> trails;
 
 	@FXML
 	private TextField trailName, trailAddress, trailDistance, trailEGain;
@@ -43,7 +44,7 @@ public class HikeRegisterController implements Initializable {
 		
 		Trail newTrail = new Trail(name, address, distance, eGain, type, difficulty);
 
-		trails.put(name, newTrail);
+		trails.add(newTrail);
 		
 		System.out.println(trails);
 	}
