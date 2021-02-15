@@ -43,6 +43,8 @@ public class Trail implements Serializable{
 	}
 
 	public double getDistance() {
+		String strDouble = String. format("%.2f", distance);
+		distance = Double.parseDouble(strDouble);
 		return distance;
 	}
 
@@ -51,6 +53,8 @@ public class Trail implements Serializable{
 	}
 
 	public double getElevationGain() {
+		String strDouble = String. format("%.2f", elevationGain);
+		elevationGain = Double.parseDouble(strDouble);
 		return elevationGain;
 	}
 

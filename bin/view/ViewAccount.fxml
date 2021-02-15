@@ -8,7 +8,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -67,11 +66,7 @@
                               <Font name="Cambria" size="14.0" />
                            </font>
                         </Label>
-                        <ImageView fx:id="profilePicture1" fitHeight="77.0" fitWidth="92.0" pickOnBounds="true" VBox.vgrow="NEVER">
-                           <image>
-                              <Image url="@../../../../../../../Pictures/Final_Project/defaultUser.jpg" />
-                           </image>
-                        </ImageView>
+                        <ImageView fx:id="profilePicture1" fitHeight="77.0" fitWidth="92.0" pickOnBounds="true" VBox.vgrow="NEVER" />
                         <Button mnemonicParsing="false" onAction="#selectPicture" text="Add Picture" textAlignment="RIGHT" />
                      </children>
                   </VBox>

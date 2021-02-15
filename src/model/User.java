@@ -20,20 +20,32 @@ public class User implements Serializable {
 	private String phone;
 	private boolean isActive;
 	private Role role;
+	private SkillLevel skillLevel;
 	private String password;
 	private LinkedList<Hike> historyMap;
 	private String profilePicture;
 
-	public User(String fName, String lName, String pNumber, String userName, String password, Role role) {
+	public User(String fName, String lName, String pNumber, String userName, String password, Role role,
+			SkillLevel skillLevel, String address) {
 		this.userName = userName;
 		this.fName = fName;
 		this.lName = lName;
 		this.phone = pNumber;
 		this.role = role;
 		this.password = password;
+		this.skillLevel = skillLevel;
+		this.address = address;
 		isActive = true;
 		profilePicture = null;
 		historyMap = new LinkedList<Hike>();
+	}
+
+	public SkillLevel getSkillLevel() {
+		return skillLevel;
+	}
+
+	public void setSkillLevel(SkillLevel skillLevel) {
+		this.skillLevel = skillLevel;
 	}
 
 	public String getUserName() {

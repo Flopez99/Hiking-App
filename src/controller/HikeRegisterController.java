@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -33,8 +34,11 @@ public class HikeRegisterController implements Initializable {
 	private ComboBox<Type> trailTypeBox;
 	@FXML
 	private ComboBox<Difficulty> difficultyBox;
+	
 
-	public void createNewTrail(ActionEvent event) {
+	
+	
+	public void createNewTrail(ActionEvent event) throws IOException {
 		String name = trailName.getText();
 		String address = trailAddress.getText();
 		double distance = Double.parseDouble(trailDistance.getText());
@@ -46,7 +50,7 @@ public class HikeRegisterController implements Initializable {
 
 		trails.add(newTrail);
 		
-		System.out.println(trails);
+		changeSceneManagement(event);
 	}
 
 	public void changeSceneManagement(ActionEvent event) throws IOException {

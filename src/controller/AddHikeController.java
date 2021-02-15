@@ -109,46 +109,47 @@ public class AddHikeController implements Initializable {
 		ObservableList<Difficulty> difficultyOption = difficultyChoiceBox.getCheckModel().getCheckedItems();
 		ObservableList<Type> typeOption = typeChoiceBox.getCheckModel().getCheckedItems();
 
-		nameList = (Data.getTrails().stream()
-				.filter(map -> map.getName().toLowerCase().startsWith(searchBar.getText().toLowerCase())))
-						.collect(Collectors.toList());
+		if (searchBar.getText() != "") {
 
-		if (difficultyOption.size() == 2) {
-			difficultyList = (nameList.stream()
-					.filter(trail -> trail.getDifficulty().equals(difficultyOption.get(0).toString())
-							|| trail.getDifficulty().equals(difficultyOption.get(1).toString()))
-					.collect(Collectors.toList()));
-		} else if (difficultyOption.size() == 1) {
-			difficultyList = (nameList.stream()
-					.filter(trail -> trail.getDifficulty().equals(difficultyOption.get(0).toString()))
-					.collect(Collectors.toList()));
-		} else if (difficultyOption.size() == 0 || difficultyOption.size() == 3) {
-			difficultyList = nameList;
-		}
+			nameList = (Data.getTrails().stream()
+					.filter(map -> map.getName().toLowerCase().startsWith(searchBar.getText().toLowerCase())))
+							.collect(Collectors.toList());
 
-		if (typeOption.size() == 2) {
-			typeList = (difficultyList.stream().filter(trail -> trail.getType().equals(typeOption.get(0).toString())
-					|| trail.getType().equals(typeOption.get(1).toString())).collect(Collectors.toList()));
-		} else if (typeOption.size() == 1) {
-			typeList = (difficultyList.stream().filter(trail -> trail.getType().equals(typeOption.get(0).toString()))
-					.collect(Collectors.toList()));
-		} else if (typeOption.size() == 0 || (typeOption.size() == 3)) {
-			typeList = difficultyList;
-		}
+			if (difficultyOption.size() == 2) {
+				difficultyList = (nameList.stream()
+						.filter(trail -> trail.getDifficulty().equals(difficultyOption.get(0))
+								|| trail.getDifficulty().equals(difficultyOption.get(1)))
+						.collect(Collectors.toList()));
+			} else if (difficultyOption.size() == 1) {
+				difficultyList = (nameList.stream()
+						.filter(trail -> trail.getDifficulty().equals(difficultyOption.get(0)))
+						.collect(Collectors.toList()));
+			} else if (difficultyOption.size() == 0 || difficultyOption.size() == 3) {
+				difficultyList = nameList;
+			}
 
-		// if(distanceSlider.getValue() != 0 || eGainSlider.getValue())
+			if (typeOption.size() == 2) {
+				typeList = (difficultyList.stream().filter(
+						trail -> trail.getType().equals(typeOption.get(0)) || trail.getType().equals(typeOption.get(1)))
+						.collect(Collectors.toList()));
+			} else if (typeOption.size() == 1) {
+				typeList = (difficultyList.stream().filter(trail -> trail.getType().equals(typeOption.get(0)))
+						.collect(Collectors.toList()));
+			} else if (typeOption.size() == 0 || (typeOption.size() == 3)) {
+				typeList = difficultyList;
+			}
 
-		finalList = (typeList.stream()
-				.filter(trail -> trail.getDistance() >= distanceSlider.getValue())
-				.filter(trail -> trail.getElevationGain() >= eGainSlider.getValue())
-				.collect(Collectors.toList()));
+			// if(distanceSlider.getValue() != 0 || eGainSlider.getValue())
 
-		ObservableList<Trail> observableList = FXCollections.observableList(finalList);
+			finalList = (typeList.stream().filter(trail -> trail.getDistance() >= distanceSlider.getValue())
+					.filter(trail -> trail.getElevationGain() >= eGainSlider.getValue()).collect(Collectors.toList()));
+
+			ObservableList<Trail> observableList = FXCollections.observableList(finalList);
 //		typeList = (ObservableList<Trail>) (typeList.stream()
 //				.filter(map -> map.getDistance()).collect(Collectors.toList()));
 
-		trailTable.setItems(observableList);
-
+			trailTable.setItems(observableList);
+		}
 	}
 
 	public void changeLabel() {
@@ -190,8 +191,6 @@ public class AddHikeController implements Initializable {
 		users = Data.getUsers();
 		trails = Data.getTrails();
 		loggedUser = Data.getLoggedUser();
-		
-		Utilities.fillTrailMap(trails);
 
 		changeLabel();
 

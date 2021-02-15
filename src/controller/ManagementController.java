@@ -10,6 +10,8 @@ import java.util.ResourceBundle;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
+import org.controlsfx.control.CheckComboBox;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,10 +23,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Data;
 import model.Difficulty;
+import model.Role;
 import model.Trail;
 import model.Type;
 import model.User;
@@ -59,6 +63,21 @@ public class ManagementController implements Initializable {
 	private TableColumn<Trail, String> typeColumn;
 	@FXML
 	private TableColumn<Trail, String> difficultyColumn;
+	@FXML
+	private TextField trailSearchBar;
+	@FXML
+	private TextField userSearchBar;
+
+	List<Trail> trailNameList = FXCollections.observableArrayList();
+	List<Trail> difficultyList = FXCollections.observableArrayList();
+	List<Trail> typeList = FXCollections.observableArrayList();
+
+	List<User> userNameList = FXCollections.observableArrayList();
+
+	@FXML
+	private CheckComboBox<Difficulty> difficultyChoiceBox;
+	@FXML
+	private CheckComboBox<Type> typeChoiceBox;
 
 	ObservableList<User> userList = FXCollections.observableArrayList();
 	ObservableList<Trail> trailList = FXCollections.observableArrayList();
@@ -72,41 +91,119 @@ public class ManagementController implements Initializable {
 		window.show();
 	}
 
-	@FXML
-	void changeSceneAddNewUser(ActionEvent event) {
-
-	}
-
-	@FXML
-	void changeSceneLoggedUser(ActionEvent event) {
-
-	}
-
-	@FXML
-	void changeSceneViewTrail(ActionEvent event) {
-
-	}
-
-	@FXML
-	void changeSceneViewUser(ActionEvent event) {
-
-	}
-
-	@FXML
-	void deleteTrail(ActionEvent event) {
-
-	}
-
-	@FXML
-	void deleteUser(ActionEvent event) {
-
-	}
-
-	public void changeSceneLoggedIn(ActionEvent e) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("/view/AdminLogged.fxml"));
+	
+	public void changeSceneViewTrail(ActionEvent event) throws IOException {
+		Data.setPickedTrail(trailTable.getSelectionModel().getSelectedItem());
+		Parent root = FXMLLoader.load(getClass().getResource("/view/UpdateTrail.fxml"));
 		Scene scene = new Scene(root);
-		Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		window.setScene(scene);
+		window.show();
+	}
+
+	public void changeSceneViewUser(ActionEvent event) throws IOException {
+		Data.setPickedUser(userTable.getSelectionModel().getSelectedItem());
+
+		Parent root = FXMLLoader.load(getClass().getResource("/view/ViewUser.fxml"));
+		Scene scene = new Scene(root);
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		window.setScene(scene);
+		window.show();
+	}
+
+	public void deleteTrail(ActionEvent event) {
+		Data.getTrails().remove(trailTable.getSelectionModel().getSelectedItem());
+		trailTable.refresh();
+
+	}
+
+	public void deleteUser(ActionEvent e) {
+		Data.getUsers().remove(userTable.getSelectionModel().getSelectedItem().getUserName());
+		userTable.refresh();
+	}
+
+	public void importTrails(ActionEvent event) {
+		Utilities.fillTrailMap(trails);
+	}
+
+	public void importUsers(ActionEvent event) {
+		Utilities.fillUserMap(users);
+	}
+
+	public void trailSearch() {
+		trailNameList.clear();
+		difficultyList.clear();
+		typeList.clear();
+
+		ObservableList<Difficulty> difficultyOption = difficultyChoiceBox.getCheckModel().getCheckedItems();
+		ObservableList<Type> typeOption = typeChoiceBox.getCheckModel().getCheckedItems();
+
+		if (trailSearchBar.getText() != "") {
+			trailNameList = (Data.getTrails().stream()
+					.filter(map -> map.getName().toLowerCase().startsWith(trailSearchBar.getText().toLowerCase())))
+							.collect(Collectors.toList());
+
+			if (difficultyOption.size() == 2) {
+				difficultyList = (trailNameList.stream()
+						.filter(trail -> trail.getDifficulty().equals(difficultyOption.get(0))
+								|| trail.getDifficulty().equals(difficultyOption.get(1)))
+						.collect(Collectors.toList()));
+			} else if (difficultyOption.size() == 1) {
+				difficultyList = (trailNameList.stream()
+						.filter(trail -> trail.getDifficulty().equals(difficultyOption.get(0)))
+						.collect(Collectors.toList()));
+			} else if (difficultyOption.size() == 0 || difficultyOption.size() == 3) {
+				difficultyList = trailNameList;
+			}
+
+			if (typeOption.size() == 2) {
+				typeList = (difficultyList.stream().filter(
+						trail -> trail.getType().equals(typeOption.get(0)) || trail.getType().equals(typeOption.get(1)))
+						.collect(Collectors.toList()));
+			} else if (typeOption.size() == 1) {
+				typeList = (difficultyList.stream().filter(trail -> trail.getType().equals(typeOption.get(0)))
+						.collect(Collectors.toList()));
+			} else if (typeOption.size() == 0 || (typeOption.size() == 3)) {
+				typeList = difficultyList;
+			}
+
+			ObservableList<Trail> observableList = FXCollections.observableList(typeList);
+
+			trailTable.setItems(observableList);
+		}
+	}
+
+	public void userSearch() {
+		userList.clear();
+
+		if (userSearchBar.getText() != "") {
+			Map<String, User> result = null;
+
+			result = (Data.getUsers().entrySet().stream()
+					.filter(user -> user.getKey().toLowerCase().startsWith((userSearchBar.getText().toLowerCase())))
+					.collect(Collectors.toMap(map -> map.getKey(), map -> map.getValue())));
+
+			for (java.util.Map.Entry<String, User> entry : result.entrySet()) {
+				userList.add(entry.getValue());
+
+			}
+
+			userTable.setItems(userList);
+
+		}
+	}
+
+	public void changeSceneLoggedUser(ActionEvent e) throws IOException {
+		Parent secondRoot = null;
+		if (loggedUser.getRole().equals(Role.ADMIN)) {
+			secondRoot = FXMLLoader.load(getClass().getResource("/view/AdminLogged.fxml"));
+		} else {
+			secondRoot = FXMLLoader.load(getClass().getResource("/view/LoggedIn.fxml"));
+
+		}
+		Scene secondScene = new Scene(secondRoot);
+		Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
+		window.setScene(secondScene);
 		window.show();
 	}
 
@@ -116,9 +213,6 @@ public class ManagementController implements Initializable {
 		trails = Data.getTrails();
 		loggedUser = Data.getLoggedUser();
 
-		Utilities.fillUserMap(users);
-		Utilities.fillTrailMap(trails);
-		
 		usernameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("userName"));
 		firstNameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("fName"));
 		lastNameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("lName"));
@@ -131,26 +225,13 @@ public class ManagementController implements Initializable {
 		typeColumn.setCellValueFactory(new PropertyValueFactory<Trail, String>("type"));
 		difficultyColumn.setCellValueFactory(new PropertyValueFactory<Trail, String>("difficulty"));
 
-		
-		List<Trail> result1 = null;
-		result1 = (Data.getTrails().stream()
-				.collect(Collectors.toList()));
+		difficultyChoiceBox.setTitle("Difficulty");
+		difficultyChoiceBox.getItems().removeAll(difficultyChoiceBox.getItems());
+		difficultyChoiceBox.getItems().addAll(Difficulty.EASY, Difficulty.MODERATE, Difficulty.HARD);
 
-		ObservableList<Trail> observableList = FXCollections.observableList(result1);
-
-		
-		trailTable.setItems(observableList);
-		
-		Map<String, User> result = null;
-		result = (Data.getUsers().entrySet().stream()
-				.collect(Collectors.toMap(map -> map.getKey(), map -> map.getValue())));
-
-		for (java.util.Map.Entry<String, User> entry : result.entrySet()) {
-			userList.add(entry.getValue());
-
-		}
-
-		userTable.setItems(userList);
+		typeChoiceBox.setTitle("Type");
+		typeChoiceBox.getItems().removeAll(typeChoiceBox.getItems());
+		typeChoiceBox.getItems().addAll(Type.LOOP, Type.POINT_TO_POINT, Type.OUT_AND_BACK);
 
 	}
 

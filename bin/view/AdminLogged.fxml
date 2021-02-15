@@ -21,20 +21,17 @@
       </VBox>
       <HBox alignment="CENTER" layoutX="154.0" layoutY="386.0" prefHeight="100.0" prefWidth="390.0" spacing="25.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#changeSceneTrailRegister" prefHeight="50.0" prefWidth="100.0" text="Register Trail" />
-            <Button mnemonicParsing="false" onAction="#changeSceneViewAccount" prefHeight="50.0" prefWidth="100.0" text="Account" />
-            <Button mnemonicParsing="false" onAction="#changeSceneManagement" prefHeight="50.0" prefWidth="100.0" text="Management" />
+            <Button mnemonicParsing="false" onAction="#changeSceneTrailRegister" prefHeight="60.0" prefWidth="110.0" text="Register Trail" />
+            <Button mnemonicParsing="false" onAction="#changeSceneViewAccount" prefHeight="60.0" prefWidth="110.0" text="Account" />
+            <Button mnemonicParsing="false" onAction="#changeSceneManagement" prefHeight="60.0" prefWidth="110.0" text="Management" />
          </children>
       </HBox>
-      <HBox layoutX="43.0" layoutY="47.0" prefHeight="100.0" prefWidth="438.0">
+      <HBox layoutX="37.0" layoutY="69.0" prefHeight="100.0" prefWidth="438.0">
          <children>
             <Label id="Welcome" text="Welcome " />
             <Label id="Welcome" fx:id="fName" text="Name" />
             <Label id="Welcome" text="!" />
          </children>
       </HBox>
-      <Label layoutX="43.0" layoutY="147.0" prefHeight="30.0" prefWidth="82.0" text="You are " />
-      <Label layoutX="178.0" layoutY="147.0" text="away from your " />
-      <Label layoutX="125.0" layoutY="194.0" text="Goal!" />
    </children>
 </AnchorPane>

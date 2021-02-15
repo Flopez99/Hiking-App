@@ -74,20 +74,30 @@
             </GridPane>
             <Button layoutX="134.0" layoutY="442.0" mnemonicParsing="false" onAction="#changeSceneTrailRegister" prefHeight="44.0" prefWidth="87.0" text="Cancel" />
             <Label id="Welcome" layoutX="98.0" text="Hike Registration" underline="true" />
-            <Label layoutX="168.0" layoutY="60.0" text="Trip Info:" />
             <Button layoutX="240.0" layoutY="442.0" mnemonicParsing="false" onAction="#registerHike" prefHeight="44.0" prefWidth="87.0" text="Register Hike" />
             <TextField fx:id="hikeDuration" layoutX="223.0" layoutY="273.0" prefHeight="26.0" prefWidth="87.0" />
             <TextField fx:id="distanceHiked" layoutX="223.0" layoutY="214.0" prefHeight="26.0" prefWidth="87.0" />
             <TextField fx:id="averagePace" layoutX="223.0" layoutY="330.0" prefHeight="26.0" prefWidth="87.0" />
             <Button layoutX="223.0" layoutY="381.0" mnemonicParsing="false" onAction="#selectPicture" prefHeight="26.0" prefWidth="87.0" text="Add Pictures" />
-            <DatePicker fx:id="dateStart" layoutX="221.0" layoutY="93.0" prefHeight="26.0" prefWidth="87.0" />
-            <DatePicker fx:id="dateEnd" layoutX="221.0" layoutY="154.0" prefHeight="26.0" prefWidth="87.0" />
+            <DatePicker fx:id="dateStart" editable="false" layoutX="221.0" layoutY="93.0" prefHeight="26.0" prefWidth="87.0" />
+            <DatePicker fx:id="dateEnd" editable="false" layoutX="221.0" layoutY="154.0" prefHeight="26.0" prefWidth="87.0" />
             <TextField fx:id="hourStart" layoutX="310.0" layoutY="93.0" prefHeight="26.0" prefWidth="35.0" />
             <TextField fx:id="minuteStart" layoutX="346.0" layoutY="93.0" prefHeight="26.0" prefWidth="35.0" />
             <ComboBox fx:id="amPmStart" layoutX="382.0" layoutY="93.0" prefHeight="26.0" prefWidth="8.0" />
             <TextField fx:id="hourEnd" layoutX="310.0" layoutY="154.0" prefHeight="26.0" prefWidth="35.0" />
             <TextField fx:id="minuteEnd" layoutX="346.0" layoutY="154.0" prefHeight="26.0" prefWidth="35.0" />
             <ComboBox fx:id="amPmEnd" layoutX="382.0" layoutY="154.0" prefHeight="26.0" prefWidth="8.0" />
+            <Label id="Error" fx:id="errorDStart" layoutX="232.0" layoutY="74.0" />
+            <Label id="Error" fx:id="errorDEnd" layoutX="219.0" layoutY="136.0" />
+            <Label id="Error" fx:id="errorDH" layoutX="223.0" layoutY="192.0" />
+            <Label id="Error" fx:id="errorHD" layoutX="223.0" layoutY="249.0" />
+            <Label id="Error" fx:id="errorAP" layoutX="223.0" layoutY="308.0" />
+            <Label id="Error" fx:id="errorTStart" layoutX="327.0" layoutY="74.0" />
+            <Label id="Error" fx:id="errorTEnd" layoutX="327.0" layoutY="136.0" />
+            <Label id="Error" fx:id="error" layoutX="269.0" layoutY="424.0" />
+            <Label id="Info" layoutX="311.0" layoutY="217.0" text="Miles" />
+            <Label id="Info" layoutX="311.0" layoutY="276.0" text="Minutes" />
+            <Label id="Info" layoutX="311.0" layoutY="333.0" text="Minutes/Miles" />
          </children>
       </AnchorPane>
    </items>

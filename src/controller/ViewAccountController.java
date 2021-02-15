@@ -1,11 +1,16 @@
 package controller;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.imageio.ImageIO;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,18 +18,22 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import model.Data;
 import model.Hike;
 import model.Role;
-import model.Trail;
 import model.User;
 
 public class ViewAccountController implements Initializable {
@@ -63,13 +72,7 @@ public class ViewAccountController implements Initializable {
 		window.show();
 	}
 
-	@FXML
-	void selectPicture(ActionEvent event) {
-
-	}
-
 	public void updateAccount(ActionEvent event) {
-		
 
 		firstName1.setDisable(updating);
 		lastName1.setDisable(updating);
@@ -82,6 +85,11 @@ public class ViewAccountController implements Initializable {
 		loggedUser.setPhone(phoneNumber1.getText());
 		loggedUser.setAddress(address1.getText());
 		loggedUser.setPassword(password1.getText());
+		
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setHeaderText("Information");
+		alert.setContentText("Update Succesful");
+		alert.show();
 
 	}
 
@@ -93,13 +101,56 @@ public class ViewAccountController implements Initializable {
 		userName1.setText(loggedUser.getUserName());
 		password1.setText(loggedUser.getPassword());
 
+		showUserImage();
+
 		userName1.setDisable(true);
 		firstName1.setDisable(true);
 		lastName1.setDisable(true);
 		phoneNumber1.setDisable(true);
 		address1.setDisable(true);
 		password1.setDisable(true);
+	}
 
+	public void showUserImage() {
+		try {
+			BufferedImage bufferedImage = ImageIO.read(new File(loggedUser.getProfilePicture()));
+			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+			profilePicture1.setImage(image);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void selectPicture(ActionEvent event) {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+		FileChooser fc = new FileChooser();
+		fc.getExtensionFilters().addAll(new ExtensionFilter("JPG Files", "*.jpg"));
+		File selectedFile = fc.showOpenDialog(stage);
+
+		if (selectedFile != null) {
+
+			try {
+				BufferedImage bufferedImage = ImageIO.read(selectedFile);
+				Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+				profilePicture1.setImage(image);
+
+				loggedUser.setProfilePicture(selectedFile.getAbsolutePath());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			try {
+				BufferedImage imageB = ImageIO.read(new File(loggedUser.getProfilePicture()));
+				Image image = SwingFXUtils.toFXImage(imageB, null);
+				profilePicture1.setImage(image);
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		}
 	}
 
 	public void selectHike(ActionEvent e) throws IOException {

@@ -17,6 +17,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -32,13 +36,19 @@ import model.User;
 
 public class ViewHikingInformation implements Initializable {
 	private TreeMap<String, User> users;
-	private User loggedUser;
 	private Hike pickedHike;
 	private Stage stage = ViewAccountController.getStage();
 
 	@FXML
 	private TilePane tile;
 
+	@FXML
+	private TextField trailName, hikeDuration,distanceHiked,averagePace,hourStart, minuteStart,hourEnd,minuteEnd;
+
+	@FXML
+	private DatePicker dateStart, dateEnd;
+	
+	
 	private ImageView createImageView(final File imageFile) {
 		// DEFAULT_THUMBNAIL_WIDTH is a constant you need to define
 		// The last two arguments are: preserveRatio, and use smooth (slower)
@@ -90,6 +100,17 @@ public class ViewHikingInformation implements Initializable {
 		return imageView;
 	}
 
+	public void fillInfo() {
+		trailName.setText(pickedHike.getTrailName());
+		hikeDuration.setText(pickedHike.getHikeDuration());
+		distanceHiked.setText(pickedHike.getDistanceHiked());
+		averagePace.setText(pickedHike.getAveragePace());
+		
+		dateStart.setPromptText(pickedHike.getDateAndTimeStarted());
+		dateEnd.setPromptText(pickedHike.getDateAndTimeEnded())
+		;
+	}
+	
 	public void changeSceneAccountInfo(ActionEvent event) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("/view/ViewAccount.fxml"));
 		Scene scene = new Scene(root);
@@ -101,8 +122,8 @@ public class ViewHikingInformation implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		users = Data.getUsers();
-		loggedUser = Data.getLoggedUser();
 		pickedHike = Data.getPickedHike();
+		fillInfo();
 		//stage = Main.getStage();
 		File[] listOfFiles = new File[pickedHike.getPicturesTaken().size()];
 

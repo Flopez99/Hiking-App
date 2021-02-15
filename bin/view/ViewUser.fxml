@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewUserController">
+   <tabs>
+      <Tab text="Account Information">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <VBox layoutX="138.0" layoutY="103.0" prefHeight="210.0" prefWidth="126.0" spacing="10.0">
+                     <children>
+                        <Label prefHeight="22.0" prefWidth="152.0" text="User Name:">
+                           <font>
+                              <Font name="Cambria" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="userName" disable="true" prefHeight="20.0" prefWidth="137.0" />
+                        <Label prefHeight="22.0" prefWidth="141.0" text="First Name: ">
+                           <font>
+                              <Font name="Cambria" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="firstName" disable="true" prefHeight="20.0" prefWidth="137.0" />
+                        <Label prefHeight="22.0" prefWidth="194.0" text="Last Name:">
+                           <font>
+                              <Font name="Cambria" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="lastName" disable="true" prefHeight="26.0" prefWidth="138.0" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="459.0" layoutY="103.0" prefHeight="200.0" prefWidth="123.0" spacing="10.0">
+                     <children>
+                        <Label prefHeight="22.0" prefWidth="161.0" text="Phone Number">
+                           <font>
+                              <Font name="Cambria" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="phoneNumber" disable="true" prefHeight="26.0" prefWidth="138.0" />
+                        <Label prefHeight="18.0" prefWidth="76.0" text="Address:">
+                           <font>
+                              <Font name="Cambria" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="address" disable="true" prefHeight="20.0" prefWidth="137.0" />
+                        <Label prefHeight="22.0" prefWidth="102.0" text="Skill Level" />
+                        <TextField fx:id="skillLevel" disable="true" />
+                     </children>
+                  </VBox>
+                  <ImageView fx:id="profilePicture" fitHeight="115.0" fitWidth="115.0" layoutX="293.0" layoutY="14.0" pickOnBounds="true" />
+                  <HBox alignment="CENTER" layoutX="135.0" layoutY="356.0" prefHeight="100.0" prefWidth="430.0" spacing="25.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#deleteUser" prefHeight="50.0" prefWidth="90.0" text="Delete" />
+                        <Button fx:id="promoteButton" mnemonicParsing="false" onAction="#promoteToAdmin" prefHeight="50.0" prefWidth="114.0" text="Promote to Admin" />
+                        <Button fx:id="disableButton" layoutX="130.0" layoutY="35.0" mnemonicParsing="false" onAction="#disableUser" prefHeight="50.0" prefWidth="90.0" text="Disable " />
+                     </children>
+                  </HBox>
+                  <Label fx:id="statusLabel" layoutX="325.0" layoutY="129.0" text="Active" />
+                  <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#changeSceneManagement" prefHeight="35.0" prefWidth="58.0" text="&lt;-" />
+                  <Label fx:id="role" layoutX="328.0" layoutY="163.0" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Hiking History">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="historyTable" layoutY="97.0" prefHeight="276.0" prefWidth="700.0">
+                     <columns>
+                        <TableColumn fx:id="trailName" prefWidth="252.79999387264252" text="Trail Name" />
+                        <TableColumn fx:id="dateStarted" prefWidth="210.4000244140625" text="Date Started" />
+                        <TableColumn fx:id="dateEnded" prefWidth="236.79989624023438" text="Date Ended" />
+                     </columns>
+                  </TableView>
+                  <Button layoutX="294.0" layoutY="400.0" mnemonicParsing="false" onAction="#selectHike" prefHeight="56.0" prefWidth="112.0" text="View Hike" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+   </tabs>
+</TabPane>

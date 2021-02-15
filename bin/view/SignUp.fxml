@@ -18,28 +18,63 @@
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#createNewUser" prefHeight="50.0" prefWidth="90.0" text="Sign Up" />
          </children></HBox>
       <Label id="Welcome" layoutX="173.0" layoutY="14.0" text="New User Registration" underline="true" />
-      <VBox layoutX="66.0" layoutY="145.0" prefHeight="270.0" prefWidth="174.0" spacing="10.0">
+      <VBox layoutX="75.0" layoutY="118.0" prefHeight="270.0" prefWidth="174.0" spacing="5.0">
          <children>
             <Label prefHeight="22.0" prefWidth="121.0" text="First Name: " />
-            <TextField fx:id="firstName" />
+            <Label id="Error" fx:id="fNError" />
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <TextField fx:id="firstName" />
+               </children>
+            </VBox>
             <Label prefHeight="22.0" prefWidth="121.0" text="Last Name: " />
-            <TextField fx:id="lastName" />
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label id="Error" fx:id="lNError" />
+                  <TextField fx:id="lastName" />
+               </children>
+            </VBox>
             <Label prefHeight="22.0" prefWidth="121.0" text="Address: " />
-            <TextField />
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label id="Error" />
+                  <TextField fx:id="addressField" />
+               </children>
+            </VBox>
             <Label prefHeight="22.0" prefWidth="83.0" text="Phone: " />
-            <TextField fx:id="phoneNumber" />
+            <Label id="Error" fx:id="pError" />
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <TextField fx:id="phoneNumber" />
+               </children>
+            </VBox>
          </children>
       </VBox>
       <Circle fx:id="myCircle" fill="DODGERBLUE" layoutX="350.0" layoutY="105.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
       <Button layoutX="394.0" layoutY="92.0" mnemonicParsing="false" onAction="#selectPicture" text="Edit" />
-      <VBox layoutX="453.0" layoutY="145.0" prefHeight="270.0" prefWidth="173.0" spacing="10.0">
+      <VBox layoutX="472.0" layoutY="118.0" prefHeight="303.0" prefWidth="174.0" spacing="5.0">
          <children>
             <Label prefHeight="22.0" prefWidth="121.0" text="Username:" />
-            <TextField fx:id="userName" />
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label id="Error" fx:id="userNameError" />
+                  <TextField fx:id="userName" />
+               </children>
+            </VBox>
             <Label prefHeight="22.0" prefWidth="121.0" text="Password:" />
-            <PasswordField fx:id="password" />
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label id="Error" fx:id="passError" />
+                  <PasswordField fx:id="password" />
+               </children>
+            </VBox>
             <Label prefHeight="22.0" prefWidth="150.0" text="Confirm Password:" />
-            <PasswordField />
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label id="Error" fx:id="passwordError" />
+                  <PasswordField fx:id="confirmPassword" />
+               </children>
+            </VBox>
             <Label prefHeight="22.0" prefWidth="105.0" text="Skill Level:" />
             <ComboBox fx:id="skillLevel" prefHeight="26.0" prefWidth="181.0" />
          </children>

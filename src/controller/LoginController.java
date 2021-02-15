@@ -6,15 +6,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 
 import javax.imageio.ImageIO;
 
-import application.Main;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,23 +20,24 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 import model.Bag;
 import model.Data;
 import model.Role;
 import model.SkillLevel;
 import model.Trail;
-import model.Type;
 import model.User;
 import model.Utilities;
 
@@ -51,10 +49,10 @@ public class LoginController implements Initializable {
 	private static boolean signingUp = false;
 	private static String imagePath;
 	@FXML
-	private TextField usernameField, userName, phoneNumber, firstName, lastName;
+	private TextField usernameField, userName, phoneNumber, firstName, lastName, addressField;
 
 	@FXML
-	private PasswordField passwordField, password;
+	private PasswordField passwordField, password, confirmPassword;
 	@FXML
 	private ComboBox<SkillLevel> skillLevel;
 
@@ -63,15 +61,54 @@ public class LoginController implements Initializable {
 	@FXML
 	private Circle myCircle;
 
+	@FXML
+	private Label error1, error2, userNameError, passwordError, lNError, fNError, pError, passError;
+
 	public Bag bag;
 
 	public void createNewUser(ActionEvent e) throws IOException {
+		refreshLabels();
+		
+		boolean canRegister = true;
 		String uName = userName.getText();
 		String fName = firstName.getText();
 		String lName = lastName.getText();
 		String pWord = password.getText();
 		String pNumber = phoneNumber.getText();
+		String address = addressField.getText();
 		Role role = null;
+		SkillLevel skillLevel1 = skillLevel.getValue();
+
+		if (uName.equals("")) {
+			canRegister = false;
+			userNameError.setText("Error: Blank User Name");
+		} else {
+			canRegister = true;
+		}
+		if (fName.equals("")) {
+			canRegister = false;
+			fNError.setText("Error: Blank First Name");
+		} else {
+			canRegister = true;
+		}
+		if (lName.equals("")) {
+			canRegister = false;
+			lNError.setText("Error: Blank Last Name");
+		} else {
+			canRegister = true;
+		}
+		if (pWord.equals("")) {
+			canRegister = false;
+			passError.setText("Error: Blank Password");
+		} else {
+			canRegister = true;
+		}
+		if (pNumber.equals("")) {
+			canRegister = false;
+			pError.setText("Error: Blank Phone Number");
+		} else {
+			canRegister = true;
+		}
 
 		if (users.isEmpty()) {
 			role = Role.ADMIN;
@@ -79,22 +116,40 @@ public class LoginController implements Initializable {
 			role = Role.USER;
 		}
 
-		User user = new User(fName, lName, pNumber, uName, pWord, role);
+		User user = new User(fName, lName, pNumber, uName, pWord, role, skillLevel1, address);
 
 		if (imagePath != null) {
 			user.setProfilePicture(imagePath);
 		} else {
 			user.setProfilePicture("Pictures/defaultUser.jpg");
 		}
-		users.put(uName, user);
 
-		userName.clear();
-		password.clear();
-		phoneNumber.clear();
-		firstName.clear();
-		lastName.clear();
+		if (pWord.equals(confirmPassword.getText())) {
 
-		changeSceneLogIn(e);
+		} else {
+			passwordError.setText("Passwords do not Match");
+			canRegister = false;
+		}
+
+		if (users.containsKey(userName.getText())) {
+			userNameError.setText("Username Already Exists");
+			canRegister = false;
+		} else {
+			if (canRegister = true) {
+				users.put(uName, user);
+				changeSceneLogIn(e);
+			}
+		}
+
+	}
+
+	public void refreshLabels() {
+		userNameError.setText("");
+		fNError.setText("");
+		lNError.setText("");
+		passError.setText("");
+		pError.setText("");
+
 	}
 
 	public void selectPicture(ActionEvent event) {
@@ -135,11 +190,18 @@ public class LoginController implements Initializable {
 
 		if (users.containsKey(uName) && users.get(uName).getPassword().equals(pWord)) {
 
+			if(users.get(uName).isActive()) {
 			loggedUser = users.get(uName);
 			Data.setLoggedUser(loggedUser);
 			changeSceneLoggedIn(event);
+			}else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setContentText("Your Account is Suspended");
+				alert.show();
+			}
 		} else {
-			System.out.println("Error");
+			error1.setText("Username or Passowrd is Incorrect");
+			error2.setText("Failed to Log In");
 		}
 
 	}
@@ -192,7 +254,6 @@ public class LoginController implements Initializable {
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		Bag b = (Bag) (ois.readObject());
 
-
 		users = b.getUsers();
 		trails = b.getTrails();
 		ois.close();
@@ -204,16 +265,7 @@ public class LoginController implements Initializable {
 		trails = Data.getTrails();
 
 
-//		try {
-//			fillData();
-//		} catch (ClassNotFoundException e1) {
-//			e1.printStackTrace();
-//		} catch (IOException e1) {
-//			e1.printStackTrace();
-//		}
 
-		System.out.println(users);
-		
 		if (signingUp) {
 			skillLevel.getItems().removeAll(skillLevel.getItems());
 			skillLevel.getItems().addAll(SkillLevel.AMATEUR, SkillLevel.EXPERIENCED, SkillLevel.PROFESIONAL);

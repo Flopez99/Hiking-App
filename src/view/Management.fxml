@@ -6,8 +6,10 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import org.controlsfx.control.CheckComboBox?>
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManagementController">
   <tabs>
@@ -15,23 +17,24 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Label id="Welcome" layoutX="202.0" layoutY="14.0" text="User Management" underline="true" />
+                  <Label id="Welcome" layoutX="203.0" layoutY="-2.0" text="User Management" underline="true" />
                   <Button layoutX="14.0" layoutY="5.0" mnemonicParsing="false" onAction="#changeSceneLoggedUser" prefHeight="32.0" prefWidth="46.0" text="&lt;-" />
-                  <TableView fx:id="userTable" layoutX="61.0" layoutY="95.0" prefHeight="285.0" prefWidth="580.0">
+                  <TableView fx:id="userTable" layoutX="1.0" layoutY="120.0" prefHeight="266.0" prefWidth="700.0">
                     <columns>
-                        <TableColumn fx:id="usernameColumn" prefWidth="136.79993438720703" text="Username" />
-                      <TableColumn fx:id="firstNameColumn" prefWidth="160.00006103515625" text="First Name" />
-                        <TableColumn fx:id="lastNameColumn" prefWidth="134.40008544921875" text="Last Name" />
-                        <TableColumn fx:id="phoneNumberColumn" prefWidth="148.79995727539062" text="Phone Number" />
+                        <TableColumn fx:id="usernameColumn" prefWidth="203.99994504451752" text="Username" />
+                      <TableColumn fx:id="firstNameColumn" prefWidth="180.00006103515625" text="First Name" />
+                        <TableColumn fx:id="lastNameColumn" prefWidth="160.00003051757812" text="Last Name" />
+                        <TableColumn fx:id="phoneNumberColumn" prefWidth="155.20001220703125" text="Phone Number" />
                     </columns>
                   </TableView>
-                  <HBox alignment="CENTER" layoutX="175.0" layoutY="381.0" prefHeight="100.0" prefWidth="351.0" spacing="20.0">
+                  <HBox alignment="CENTER" layoutX="143.0" layoutY="370.0" prefHeight="100.0" prefWidth="414.0" spacing="20.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#changeSceneAddNewUser" prefHeight="50.0" prefWidth="90.0" text="Add New" />
                         <Button mnemonicParsing="false" onAction="#changeSceneViewUser" prefHeight="50.0" prefWidth="90.0" text="View Profile" />
                         <Button mnemonicParsing="false" onAction="#deleteUser" prefHeight="50.0" prefWidth="90.0" text="Delete" />
+                        <Button layoutX="196.0" layoutY="35.0" mnemonicParsing="false" onAction="#importUsers" prefHeight="50.0" prefWidth="90.0" text="Import" />
                      </children>
                   </HBox>
+                  <TextField fx:id="userSearchBar" layoutX="243.0" layoutY="68.0" onKeyTyped="#userSearch" prefHeight="26.0" prefWidth="214.0" promptText="Search User" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -41,25 +44,29 @@
                <children>
                   <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="472.0" prefWidth="700.0" stylesheets="@style.css">
                      <children>
-                        <Label id="Welcome" layoutX="202.0" layoutY="14.0" text="Trail Management" underline="true" />
-                        <Button layoutX="14.0" layoutY="5.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="46.0" text="&lt;-" />
-                        <TableView fx:id="trailTable" layoutX="60.0" layoutY="93.0" prefHeight="285.0" prefWidth="580.0">
+                        <Label id="Welcome" layoutX="201.0" layoutY="-2.0" text="Trail Management" underline="true" />
+                        <Button layoutX="14.0" layoutY="5.0" mnemonicParsing="false" onAction="#changeSceneLoggedUser" prefHeight="32.0" prefWidth="46.0" text="&lt;-" />
+                        <TableView fx:id="trailTable" layoutX="-1.0" layoutY="120.0" prefHeight="280.0" prefWidth="700.0">
                           <columns>
-                            <TableColumn fx:id="trailNameColumn" prefWidth="75.0" text="Name" />
-                            <TableColumn fx:id="trailAddressColumn" prefWidth="124.0" text="Address" />
-                              <TableColumn fx:id="distanceColumn" prefWidth="81.5999755859375" text="Distance" />
-                              <TableColumn fx:id="elevationGainColumn" prefWidth="127.20001220703125" text="Elevation Gain" />
-                              <TableColumn fx:id="typeColumn" prefWidth="88.80001831054688" text="Type" />
-                              <TableColumn fx:id="difficultyColumn" prefWidth="86.39996337890625" text="Difficulty" />
+                            <TableColumn fx:id="trailNameColumn" prefWidth="99.99996793270111" text="Name" />
+                            <TableColumn fx:id="trailAddressColumn" prefWidth="106.4000015258789" text="Address" />
+                              <TableColumn fx:id="distanceColumn" prefWidth="100.79998779296875" text="Distance" />
+                              <TableColumn fx:id="elevationGainColumn" prefWidth="161.5999755859375" text="Elevation Gain" />
+                              <TableColumn fx:id="typeColumn" prefWidth="124.79995727539062" text="Type" />
+                              <TableColumn fx:id="difficultyColumn" prefWidth="108.79998779296875" text="Difficulty" />
                           </columns>
                         </TableView>
-                        <HBox alignment="CENTER" layoutX="174.0" layoutY="379.0" prefHeight="100.0" prefWidth="351.0" spacing="20.0">
+                        <HBox alignment="CENTER" layoutX="125.0" layoutY="381.0" prefHeight="100.0" prefWidth="450.0" spacing="20.0">
                            <children>
                               <Button mnemonicParsing="false" onAction="#changeSceneAddNewTrail" prefHeight="50.0" prefWidth="90.0" text="Add New" />
-                              <Button mnemonicParsing="false" onAction="#changeSceneViewTrail" prefHeight="50.0" prefWidth="90.0" text="View Hike" />
+                              <Button mnemonicParsing="false" onAction="#changeSceneViewTrail" prefHeight="50.0" prefWidth="90.0" text="View Trail" />
                               <Button mnemonicParsing="false" onAction="#deleteTrail" prefHeight="50.0" prefWidth="90.0" text="Delete" />
+                              <Button layoutX="251.0" layoutY="35.0" mnemonicParsing="false" onAction="#importTrails" prefHeight="50.0" prefWidth="90.0" text="Import" />
                            </children>
                         </HBox>
+                        <TextField fx:id="trailSearchBar" layoutX="242.0" layoutY="68.0" onKeyTyped="#trailSearch" prefHeight="26.0" prefWidth="214.0" promptText="Search Trail" />
+                        <CheckComboBox fx:id="typeChoiceBox" layoutX="580.0" layoutY="68.0" prefHeight="26.0" prefWidth="94.0" />
+                        <CheckComboBox fx:id="difficultyChoiceBox" layoutX="468.0" layoutY="68.0" prefHeight="26.0" prefWidth="94.0" />
                      </children>
                   </AnchorPane>
                </children></AnchorPane>
