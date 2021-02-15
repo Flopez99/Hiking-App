@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 
@@ -22,13 +23,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
+import model.Bag;
 import model.Data;
+import model.Trail;
 import model.User;
+import model.Utilities;
 
 public class LoggedUserController implements Initializable {
 	private static User loggedUser;
 	private TreeMap<String, User> users;
-
+	private static HashSet<Trail> trails;
 	
 	@FXML
 	public Label fName;
@@ -88,9 +92,11 @@ public class LoggedUserController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		users = Data.getUsers();
+		trails = Data.getTrails();
 		loggedUser = Data.getLoggedUser();
 		showUserImage();
 		changeNameLabel();
+		
 	}
 
 }

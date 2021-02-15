@@ -1,36 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoggedUserController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoggedUserController">
    <children>
-      <Label fx:id="nameLabel" layoutX="631.0" layoutY="14.0" text="Name" />
-      <HBox prefHeight="100.0" prefWidth="200.0" />
-      <HBox alignment="CENTER" layoutX="171.0" layoutY="386.0" prefHeight="100.0" prefWidth="358.0" spacing="25.0">
+      <VBox alignment="CENTER" layoutX="556.0" prefHeight="238.0" prefWidth="144.0" spacing="20.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#changeSceneLogOut" prefHeight="51.0" prefWidth="110.0" text="Log Out" />
-            <Button mnemonicParsing="false" onAction="#changeSceneLogOut" prefHeight="51.0" prefWidth="110.0" text="Account" />
-            <Button mnemonicParsing="false" onAction="#changeSceneLogOut" prefHeight="51.0" prefWidth="110.0" text="Management" />
+            <ImageView fx:id="userPicture" fitHeight="98.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true" />
+            <Button mnemonicParsing="false" onAction="#changeSceneLogOut" prefHeight="50.0" prefWidth="100.0" text="Log Out">
+               <VBox.margin>
+                  <Insets bottom="50.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" layoutX="154.0" layoutY="386.0" prefHeight="100.0" prefWidth="390.0" spacing="25.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#changeSceneTrailRegister" prefHeight="50.0" prefWidth="100.0" text="Register Trail" />
+            <Button mnemonicParsing="false" onAction="#changeSceneViewAccount" prefHeight="50.0" prefWidth="100.0" text="Account" />
          </children>
       </HBox>
-      <TableView layoutX="-10.0" layoutY="94.0" prefHeight="270.0" prefWidth="700.0">
-        <columns>
-          <TableColumn prefWidth="84.0" text="Name" />
-          <TableColumn prefWidth="142.4000244140625" text="Address" />
-            <TableColumn prefWidth="117.5999755859375" text="Distance" />
-            <TableColumn prefWidth="133.60003662109375" text="Elevation Gain" />
-            <TableColumn prefWidth="119.20001220703125" text="Type" />
-            <TableColumn prefWidth="106.4000244140625" text="Difficulty" />
-        </columns>
-      </TableView>
-      <TextField layoutX="253.0" layoutY="50.0" prefHeight="26.0" prefWidth="194.0" />
-      <ComboBox layoutX="454.0" layoutY="51.0" prefWidth="150.0" />
+      <HBox layoutX="43.0" layoutY="47.0" prefHeight="100.0" prefWidth="438.0">
+         <children>
+            <Label id="Welcome" text="Welcome " />
+            <Label id="Welcome" fx:id="fName" text="Name" />
+            <Label id="Welcome" text="!" />
+         </children>
+      </HBox>
+      <Label layoutX="43.0" layoutY="147.0" prefHeight="30.0" prefWidth="82.0" text="You are " />
+      <Label layoutX="178.0" layoutY="147.0" text="away from your " />
+      <Label layoutX="125.0" layoutY="194.0" text="Goal!" />
    </children>
 </AnchorPane>

@@ -1,13 +1,17 @@
 package model;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.LinkedList;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class Hike implements Comparable {
-	private SimpleStringProperty trailName;
-	private SimpleStringProperty dateAndTimeStarted;
-	private SimpleStringProperty dateAndTimeEnded;
+public class Hike implements Comparable, Serializable {
+	private String trailName;
+	private String dateAndTimeStarted;
+	private String dateAndTimeEnded;
 	private String distanceHiked;
 	private String averagePace;
 	private String hikeDuration;
@@ -17,10 +21,10 @@ public class Hike implements Comparable {
 			String duration, String averagePace, LinkedList<String> picturesTaken) {
 		super();
 		this.hikeDuration = duration;
-		this.trailName = new SimpleStringProperty(trailName);
+		this.trailName = trailName;
 		this.averagePace = averagePace;
-		this.dateAndTimeStarted = new SimpleStringProperty(dateAndTimeStarted);
-		this.dateAndTimeEnded = new SimpleStringProperty(dateAndTimeEnded);
+		this.dateAndTimeStarted = dateAndTimeStarted;
+		this.dateAndTimeEnded = dateAndTimeEnded;
 		this.distanceHiked = distanceHiked;
 		this.picturesTaken = picturesTaken;
 	}
@@ -41,27 +45,29 @@ public class Hike implements Comparable {
 		this.averagePace = averagePace;
 	}
 
+	
+
 	public String getTrailName() {
-		return trailName.get();
+		return trailName;
 	}
 
-	public void setTrailName(SimpleStringProperty trailName) {
+	public void setTrailName(String trailName) {
 		this.trailName = trailName;
 	}
 
 	public String getDateAndTimeStarted() {
-		return dateAndTimeStarted.get();
+		return dateAndTimeStarted;
 	}
 
-	public void setDateAndTimeStarted(SimpleStringProperty dateAndTimeStarted) {
+	public void setDateAndTimeStarted(String dateAndTimeStarted) {
 		this.dateAndTimeStarted = dateAndTimeStarted;
 	}
 
 	public String getDateAndTimeEnded() {
-		return dateAndTimeEnded.get();
+		return dateAndTimeEnded;
 	}
 
-	public void setDateAndTimeEnded(SimpleStringProperty dateAndTimeEnded) {
+	public void setDateAndTimeEnded(String dateAndTimeEnded) {
 		this.dateAndTimeEnded = dateAndTimeEnded;
 	}
 
@@ -92,5 +98,6 @@ public class Hike implements Comparable {
 
 		return 0;
 	}
-
+	
+	
 }

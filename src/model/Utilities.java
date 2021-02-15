@@ -2,8 +2,12 @@ package model;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
@@ -91,7 +95,7 @@ public class Utilities {
 		double eGain = rand.nextDouble() * 1000;
 		
 		Trail newTrail = new Trail(trailName, address, distance, eGain, type[rand.nextInt(3)], difficulty[rand.nextInt(3)]);
-		
+		System.out.println(newTrail);
 		trails.add(newTrail);
 		index++;
 		}
@@ -109,8 +113,7 @@ public class Utilities {
 			String firstName = names[rand.nextInt(names.length)].getFirstName();
 			String lastName = names[rand.nextInt(names.length)].getLastName();
 			String phoneNumber = phoneNumbers[rand.nextInt(phoneNumbers.length)];
-			userName = firstName + lastName.charAt(0) + phoneNumber.substring(3);
-			LinkedList<Trail> list = new LinkedList<Trail>();
+			userName = firstName + lastName.charAt(0) + phoneNumber.substring(1);
 
 			User user = new User(firstName, lastName, phoneNumber, userName, "123", Role.USER);
 
@@ -144,6 +147,26 @@ public class Utilities {
 
 		}
 		return phoneNumbers;
+	}
+	public static void writeBinary(Bag bag) throws IOException {
+		FileOutputStream dos = new FileOutputStream("RawData/data.dat");
+		ObjectOutputStream oos = new ObjectOutputStream(dos);
+		oos.writeObject(bag);
+		oos.close();
+
+		System.out.println("Done writing!");
+	}
+	public static void readBinary(TreeMap<String, User> users,HashSet<Trail> trails ) throws IOException, ClassNotFoundException {
+		FileInputStream fis = new FileInputStream("RawData/data.dat");
+		ObjectInputStream ois = new ObjectInputStream(fis);
+		Bag b = (Bag)(ois.readObject());
+
+		//System.out.println(b.getUsers());
+		users = b.getUsers();
+		trails = b.getTrails();
+		ois.close();
+
+
 	}
 
 }

@@ -33,10 +33,10 @@
          </contextMenu>
       </TableView>
       <Label layoutX="322.0" layoutY="33.0" text="Search:" />
-      <Slider fx:id="distanceSlider" layoutX="482.0" layoutY="119.0" onMouseExited="#changeLabel" prefHeight="14.0" prefWidth="100.0" />
-      <Slider fx:id="eGainSlider" layoutX="582.0" layoutY="119.0" prefHeight="14.0" prefWidth="108.0" />
-      <Label fx:id="distanceLabel" layoutX="510.0" layoutY="133.0" text="Label" />
-      <Label fx:id="eGainLabel" layoutX="614.0" layoutY="133.0" text="Label" />
+      <Slider fx:id="distanceSlider" layoutX="482.0" layoutY="119.0" max="999.0" onMouseExited="#changeLabel" prefHeight="14.0" prefWidth="100.0" />
+      <Slider fx:id="eGainSlider" layoutX="582.0" layoutY="119.0" max="999.0" prefHeight="14.0" prefWidth="108.0" />
+      <Label fx:id="distanceLabel" layoutX="526.0" layoutY="133.0" text="0" />
+      <Label fx:id="eGainLabel" layoutX="630.0" layoutY="133.0" text="0" />
       <Label layoutX="499.0" layoutY="104.0" text="Distance" />
       <Label layoutX="609.0" layoutY="104.0" text="E Gain" />
       <Button layoutX="322.0" layoutY="100.0" mnemonicParsing="false" onAction="#test" prefHeight="26.0" prefWidth="56.0" text="Search" />

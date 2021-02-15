@@ -55,8 +55,8 @@ public class ViewHikeController implements Initializable {
 		trailAdress.setText(pickedTrail.getAddress());
 		trailDistance.setText(pickedTrail.getDistance() + "");
 		trailEGain.setText(pickedTrail.getElevationGain() + "");
-		trailDifficulty.setText(pickedTrail.getDifficulty());
-		trailType.setText(pickedTrail.getType());
+		trailDifficulty.setText(pickedTrail.getDifficulty() + "");
+		trailType.setText(pickedTrail.getType() + "");
 		amPmStart.getItems().addAll("AM","PM");
 		amPmEnd.getItems().addAll("AM","PM");
 		

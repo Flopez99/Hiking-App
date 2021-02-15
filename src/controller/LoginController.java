@@ -2,9 +2,12 @@ package controller;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
@@ -21,6 +24,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -30,19 +34,27 @@ import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
+import model.Bag;
 import model.Data;
 import model.Role;
+import model.SkillLevel;
+import model.Trail;
 import model.Type;
 import model.User;
+import model.Utilities;
 
 public class LoginController implements Initializable {
 	private static User loggedUser;
 	private TreeMap<String, User> users;
+	private HashSet<Trail> trails;
+
 	private static boolean signingUp = false;
 	private static String imagePath;
 	@FXML
-	private TextField usernameField, passwordField, userName, password, phoneNumber, firstName, lastName;
+	private TextField usernameField, userName, phoneNumber, firstName, lastName;
 
+	@FXML
+	private PasswordField passwordField, password;
 	@FXML
 	private ComboBox<SkillLevel> skillLevel;
 
@@ -50,6 +62,8 @@ public class LoginController implements Initializable {
 	private ImageView profilePicture;
 	@FXML
 	private Circle myCircle;
+
+	public Bag bag;
 
 	public void createNewUser(ActionEvent e) throws IOException {
 		String uName = userName.getText();
@@ -72,7 +86,6 @@ public class LoginController implements Initializable {
 		} else {
 			user.setProfilePicture("Pictures/defaultUser.jpg");
 		}
-		System.out.println(user);
 		users.put(uName, user);
 
 		userName.clear();
@@ -80,9 +93,6 @@ public class LoginController implements Initializable {
 		phoneNumber.clear();
 		firstName.clear();
 		lastName.clear();
-
-		System.out.println(user.getProfilePicture());
-		// System.out.println(users);
 
 		changeSceneLogIn(e);
 	}
@@ -124,12 +134,24 @@ public class LoginController implements Initializable {
 		String pWord = passwordField.getText();
 
 		if (users.containsKey(uName) && users.get(uName).getPassword().equals(pWord)) {
+
 			loggedUser = users.get(uName);
 			Data.setLoggedUser(loggedUser);
 			changeSceneLoggedIn(event);
 		} else {
 			System.out.println("Error");
 		}
+
+	}
+
+	public void save() throws IOException {
+
+		System.out.println(users);
+		bag = new Bag(users, trails);
+		bag.setUsers(users);
+		bag.setTrails(trails);
+		Utilities.writeBinary(bag);
+		System.out.println("Program ended");
 
 	}
 
@@ -165,16 +187,36 @@ public class LoginController implements Initializable {
 		window.show();
 	}
 
+	public void fillData() throws ClassNotFoundException, IOException {
+		FileInputStream fis = new FileInputStream("RawData/data.dat");
+		ObjectInputStream ois = new ObjectInputStream(fis);
+		Bag b = (Bag) (ois.readObject());
+
+
+		users = b.getUsers();
+		trails = b.getTrails();
+		ois.close();
+	}
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		users = Data.getUsers();
+		trails = Data.getTrails();
 
-			
-		
+
+//		try {
+//			fillData();
+//		} catch (ClassNotFoundException e1) {
+//			e1.printStackTrace();
+//		} catch (IOException e1) {
+//			e1.printStackTrace();
+//		}
+
+		System.out.println(users);
 		
 		if (signingUp) {
 			skillLevel.getItems().removeAll(skillLevel.getItems());
-			skillLevel.getItems().addAll(SkillLevel.AMATEUR, SkillLevel.EXPERIENCED,SkillLevel.PROFESIONAL);	
+			skillLevel.getItems().addAll(SkillLevel.AMATEUR, SkillLevel.EXPERIENCED, SkillLevel.PROFESIONAL);
 			BufferedImage imageB = null;
 			try {
 				imageB = ImageIO.read(new File("Pictures/defaultUser.jpg"));

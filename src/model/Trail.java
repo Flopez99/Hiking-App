@@ -1,72 +1,76 @@
 package model;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class Trail {
+public class Trail implements Serializable{
+	private String name;
+	private String address;
+	private double distance;
+	private double elevationGain;
+	private Type type;
+	private Difficulty difficulty;
 
-	private SimpleStringProperty name;
-	private SimpleStringProperty address;
-	private SimpleDoubleProperty distance;
-	private SimpleDoubleProperty elevationGain;
-	private SimpleStringProperty type;
-	private SimpleStringProperty difficulty;
-	
 	public Trail(String name, String address, double distance, double elevationGain, Type type, Difficulty difficulty) {
-		this.name = new SimpleStringProperty(name);
-		this.address = new SimpleStringProperty(address);
-		this.distance = new SimpleDoubleProperty(distance);
-		this.elevationGain = new SimpleDoubleProperty(elevationGain);
-		this.type = new SimpleStringProperty(type.toString());
-		this.difficulty = new SimpleStringProperty(difficulty.toString());
+		super();
+		this.name = name;
+		this.address = address;
+		this.distance = distance;
+		this.elevationGain = elevationGain;
+		this.type = type;
+		this.difficulty = difficulty;
 	}
 
 	public String getName() {
-		return name.get();
-		
+		return name;
 	}
 
-	public void setName(SimpleStringProperty name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
 	public String getAddress() {
-		return address.get();
+		return address;
 	}
 
-	public void setAddress(SimpleStringProperty address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 
 	public double getDistance() {
-		return distance.get();
+		return distance;
 	}
 
-	public void setDistance(SimpleDoubleProperty distance) {
+	public void setDistance(double distance) {
 		this.distance = distance;
 	}
 
 	public double getElevationGain() {
-		return elevationGain.get();
+		return elevationGain;
 	}
 
-	public void setElevationGain(SimpleDoubleProperty elevationGain) {
+	public void setElevationGain(double elevationGain) {
 		this.elevationGain = elevationGain;
 	}
 
-	public String getType() {
-		return type.get();
+	public Type getType() {
+		return type;
 	}
 
-	public void setType(SimpleStringProperty type) {
+	public void setType(Type type) {
 		this.type = type;
 	}
 
-	public String getDifficulty() {
-		return difficulty.get();
+	public Difficulty getDifficulty() {
+		return difficulty;
 	}
 
-	public void setDifficulty(SimpleStringProperty difficulty) {
+	public void setDifficulty(Difficulty difficulty) {
 		this.difficulty = difficulty;
 	}
 
@@ -75,6 +79,5 @@ public class Trail {
 		return "Trail [name=" + name + ", address=" + address + ", distance=" + distance + ", elevationGain="
 				+ elevationGain + ", type=" + type + ", difficulty=" + difficulty + "]";
 	}
-	
-	
+
 }

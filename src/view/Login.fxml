@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -32,10 +33,11 @@
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Label alignment="CENTER" text="Password:" />
-                  <TextField fx:id="passwordField" VBox.vgrow="ALWAYS" />
+                  <PasswordField fx:id="passwordField" />
                </children>
             </VBox>
          </children>
       </VBox>
+      <Button layoutX="615.0" layoutY="461.0" mnemonicParsing="false" onAction="#save" text="Button" />
    </children>
 </AnchorPane>

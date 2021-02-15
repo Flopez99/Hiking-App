@@ -24,32 +24,33 @@ import javafx.stage.Stage;
 import model.Data;
 import model.Hike;
 import model.Role;
+import model.Trail;
 import model.User;
 
-public class ViewAccountController implements Initializable{
+public class ViewAccountController implements Initializable {
 
-    @FXML
-    private TextField firstName1 ,lastName1, phoneNumber1, address1, userName1;
-    @FXML
-    private PasswordField password1;
-    @FXML
-    private ImageView profilePicture1;
+	@FXML
+	private TextField firstName1, lastName1, phoneNumber1, address1, userName1;
+	@FXML
+	private PasswordField password1;
+	@FXML
+	private ImageView profilePicture1;
 
-    @FXML
-    private TableView<Hike> historyTable;
+	@FXML
+	private TableView<Hike> historyTable;
 
-    @FXML
-    private TableColumn<Hike,String> trailName, dateStarted, dateEnded;
-    
-   
-    
-    private User loggedUser;
-    private ObservableList<Hike> hikingHistory;
-    
-    
-    @FXML
-    void changeSceneUserLoggedIn(ActionEvent event) throws IOException {
-    	Parent secondRoot = null;
+	@FXML
+	private TableColumn<Hike, String> trailName, dateStarted, dateEnded;
+
+	public static Stage stage;
+
+	private User loggedUser;
+	private ObservableList<Hike> hikingHistory;
+	private boolean updating = false;
+
+	@FXML
+	void changeSceneUserLoggedIn(ActionEvent event) throws IOException {
+		Parent secondRoot = null;
 		if (loggedUser.getRole().equals(Role.ADMIN)) {
 			secondRoot = FXMLLoader.load(getClass().getResource("/view/AdminLogged.fxml"));
 		} else {
@@ -60,34 +61,80 @@ public class ViewAccountController implements Initializable{
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		window.setScene(secondScene);
 		window.show();
-    }
+	}
 
-    @FXML
-    void selectPicture(ActionEvent event) {
+	@FXML
+	void selectPicture(ActionEvent event) {
 
-    }
+	}
 
-    @FXML
-    void updateAccount(ActionEvent event) {
+	public void updateAccount(ActionEvent event) {
+		
 
-    }
-    
-    
-	
-	
+		firstName1.setDisable(updating);
+		lastName1.setDisable(updating);
+		phoneNumber1.setDisable(updating);
+		address1.setDisable(updating);
+		password1.setDisable(updating);
+
+		loggedUser.setfName(firstName1.getText());
+		loggedUser.setlName(lastName1.getText());
+		loggedUser.setPhone(phoneNumber1.getText());
+		loggedUser.setAddress(address1.getText());
+		loggedUser.setPassword(password1.getText());
+
+	}
+
+	public void fillInfo() {
+		firstName1.setText(loggedUser.getFName());
+		lastName1.setText(loggedUser.getLName());
+		phoneNumber1.setText(loggedUser.getPhone());
+		address1.setText(loggedUser.getAddress());
+		userName1.setText(loggedUser.getUserName());
+		password1.setText(loggedUser.getPassword());
+
+		userName1.setDisable(true);
+		firstName1.setDisable(true);
+		lastName1.setDisable(true);
+		phoneNumber1.setDisable(true);
+		address1.setDisable(true);
+		password1.setDisable(true);
+
+	}
+
+	public void selectHike(ActionEvent e) throws IOException {
+		Hike hike = historyTable.getSelectionModel().getSelectedItem();
+
+		Data.setPickedHike(hike);
+
+		changeSceneHikeView(e);
+	}
+
+	private void changeSceneHikeView(ActionEvent e) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("/view/HikeView.fxml"));
+		Scene scene = new Scene(root);
+		Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
+		window.setScene(scene);
+		window.show();
+		stage = window;
+	}
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		loggedUser = Data.getLoggedUser();
 		hikingHistory = FXCollections.observableArrayList(loggedUser.getHistoryMap());
-		
+
 		trailName.setCellValueFactory(new PropertyValueFactory<Hike, String>("trailName"));
 		dateStarted.setCellValueFactory(new PropertyValueFactory<Hike, String>("dateAndTimeStarted"));
 		dateEnded.setCellValueFactory(new PropertyValueFactory<Hike, String>("dateAndTimeEnded"));
 
 		historyTable.setItems(hikingHistory);
-		
-		
+
+		fillInfo();
 	}
 
-	
+	public static Stage getStage() {
+		return stage;
+	}
+
 }

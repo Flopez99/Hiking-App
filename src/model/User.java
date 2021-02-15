@@ -1,5 +1,8 @@
 package model;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.TreeMap;
@@ -9,24 +12,23 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.Image;
 
 public class User implements Serializable {
-	
-	private SimpleStringProperty userName;
-	private SimpleStringProperty fName;
-	private SimpleStringProperty lName;
-	private SimpleStringProperty address;
-	private SimpleStringProperty phone;
+
+	private String userName;
+	private String fName;
+	private String lName;
+	private String address;
+	private String phone;
 	private boolean isActive;
 	private Role role;
 	private String password;
 	private LinkedList<Hike> historyMap;
 	private String profilePicture;
 
-
 	public User(String fName, String lName, String pNumber, String userName, String password, Role role) {
-		this.userName = new SimpleStringProperty(userName);
-		this.fName = new SimpleStringProperty(fName);
-		this.lName = new SimpleStringProperty(lName);
-		this.phone = new SimpleStringProperty(pNumber);
+		this.userName = userName;
+		this.fName = fName;
+		this.lName = lName;
+		this.phone = pNumber;
 		this.role = role;
 		this.password = password;
 		isActive = true;
@@ -35,42 +37,42 @@ public class User implements Serializable {
 	}
 
 	public String getUserName() {
-		return userName.get();
+		return userName;
 	}
 
-	public void setUserName(SimpleStringProperty userName) {
+	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 
 	public String getFName() {
-		return fName.get();
+		return fName;
 	}
 
-	public void setfName(SimpleStringProperty fName) {
+	public void setfName(String fName) {
 		this.fName = fName;
 	}
 
 	public String getLName() {
-		return lName.get();
+		return lName;
 	}
 
-	public void setlName(SimpleStringProperty lName) {
+	public void setlName(String lName) {
 		this.lName = lName;
 	}
 
 	public String getAddress() {
-		return address.get();
+		return address;
 	}
 
-	public void setAddress(SimpleStringProperty address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 
 	public String getPhone() {
-		return phone.get();
+		return phone;
 	}
 
-	public void setPhone(SimpleStringProperty phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
@@ -114,13 +116,10 @@ public class User implements Serializable {
 		this.profilePicture = profilePicture;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "User [userName=" + userName + ", fName=" + fName + ", lName=" + lName + ", phone=" + phone
 				+ ", isActive=" + isActive + ", role=" + role + ", password=" + password + "]";
 	}
 
-	
 }
